@@ -12,7 +12,6 @@ call plug#begin(expand('~/.config/nvim/plugged'))
 "}}}
 
 " ================= UI ============================== "{{{
-Plug 'morhetz/gruvbox'
 Plug 'sainnhe/gruvbox-material'
 Plug 'vim-airline/vim-airline'                          " airline status bar
 
@@ -30,6 +29,12 @@ Plug 'tpope/vim-commentary'                             " better commenting
 Plug 'tpope/vim-fugitive'                               " git support
 Plug 'psliwka/vim-smoothie'                             " some very smooth ass scrolling
 Plug 'tpope/vim-eunuch'                                 " run common Unix commands inside Vim
+Plug 'jiangmiao/auto-pairs'                             " autopairs (verify vim-closer)
+Plug 'machakann/vim-highlightedyank'                    " highlight yanked area
+Plug 'AndrewRadev/splitjoin.vim'                        " Split/Join oneliners into multiline
+Plug 'easymotion/vim-easymotion'                        " Easy motion
+Plug 'terryma/vim-expand-region'                        " Expand regions increasingly
+
 call plug#end()
 
 "}}}
@@ -101,8 +106,6 @@ set background=dark
 let g:gruvbox_material_background='hard'
 let g:gruvbox_material_enable_italic=1
 
-" normal gruvbox
-let g:gruvbox_contrast_dark='hard'
 syntax enable
 colorscheme gruvbox-material
 
@@ -155,7 +158,6 @@ let g:coc_snippet_prev = '<S-Tab>'
 
 " list of the extensions to make sure are always installed
 let g:coc_global_extensions = [
-            \'coc-yank',
             \'coc-pairs',
             \'coc-lists',
             \'coc-clangd',
@@ -175,6 +177,9 @@ let g:fzf_tags_command = 'ctags -R'
 
 let $FZF_DEFAULT_OPTS = '--layout=reverse --inline-info'
 let $FZF_DEFAULT_COMMAND = "rg --files --hidden --glob '!.git/**' --glob '!build/**' --glob '!.dart_tool/**' --glob '!.idea' --glob '!node_modules'"
+
+" highlight yanked area
+let g:highlightedyank_highlight_duration = 1000
 
 "}}}
 
@@ -256,20 +261,16 @@ endfunction
 
 "" the essentials
 let mapleader=","
+
 nnoremap ; :
-nmap \ <leader>q
+
 nmap <leader>r :so ~/.config/nvim/init.vim<CR>
 nmap <leader>q :bd<CR>
 nmap <leader>w :w<CR>
 map <leader>s :Format<CR>
+
 nmap <Tab> :bnext<CR>
 nmap <S-Tab> :bprevious<CR>
-noremap <leader>e :PlugInstall<CR>
-noremap <C-q> :q<CR>
-
-" new line in normal mode and back
-map <Enter> o<ESC>
-map <S-Enter> O<ESC>
 
 " use a different register for delete and paste
 nnoremap d "_d
@@ -277,16 +278,12 @@ vnoremap d "_d
 vnoremap p "_dP
 nnoremap x "_x
 
-" emulate windows copy, cut behavior
-vnoremap <LeftRelease> "+y<LeftRelease>
-vnoremap <C-c> "+y<CR>
-vnoremap <C-x> "+d<CR>
+" " switch between splits using ctrl + shift + {left,right,up,down}
+noremap <C-S-Down> <C-W><C-J>
+nnoremap <C-S-Up> <C-W><C-K>
+nnoremap <C-S-Right> <C-W><C-L>
+nnoremap <C-S-Left> <C-W><C-H>
 
-" switch between splits using ctrl + {h,j,k,l}
-inoremap <C-h> <C-\><C-N><C-w>h
-inoremap <C-j> <C-\><C-N><C-w>j
-inoremap <C-k> <C-\><C-N><C-w>k
-inoremap <C-l> <C-\><C-N><C-w>l
 nnoremap <C-h> <C-w>h
 noremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
@@ -298,11 +295,13 @@ noremap <silent><esc> <esc>:noh<CR><esc>
 " trim white spaces
 nnoremap <F2> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
 
+" comments
+map <silent><nowait> <space>cl gc
+
 "" FZF
-nnoremap <silent> <leader>f :Files<CR>
-nmap <leader>b :Buffers<CR>
-nmap <leader>c :Commands<CR>
-nmap <leader>t :BTags<CR>
+nnoremap <silent> <leader>zf :Files<CR>
+nmap <leader>zb :Buffers<CR>
+nmap <leader>zc :Commands<CR>
 nmap <leader>/ :Rg<CR>
 nmap <leader>gc :Commits<CR>
 nmap <leader>gs :GFiles?<CR>
@@ -326,17 +325,14 @@ nmap <leader>rn <Plug>(coc-rename)
 nmap <leader>o :OR <CR>
 
 " jump stuff
-nmap <leader>jd <Plug>(coc-definition)
-nmap <leader>jy <Plug>(coc-type-definition)
-nmap <leader>ji <Plug>(coc-implementation)
-nmap <leader>jr <Plug>(coc-references)
+nmap <leader>cd <Plug>(coc-definition)
+nmap <leader>cy <Plug>(coc-type-definition)
+nmap <leader>ci <Plug>(coc-implementation)
+nmap <leader>cr <Plug>(coc-references)
 
 " other coc actions
 
 " multiple cursors
-"nnoremap <a-cr> something
-
-"nmap <expr> <silent> <C-d> <SID>select_current_word()
 nmap <expr> <silent> <M-j> <SID>select_current_word()
 function! s:select_current_word()
   if !get(b:, 'coc_cursors_activated', 0)
@@ -357,20 +353,16 @@ nmap <leader>a <Plug>(coc-codeaction-line)
 xmap <leader>a <Plug>(coc-codeaction-selected)
 
 " Show all diagnostics.
-nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
+nnoremap <silent><nowait> <space>cd  :<C-u>CocList diagnostics<cr>
 " Manage extensions.
-nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
+nnoremap <silent><nowait> <space>ce  :<C-u>CocList extensions<cr>
 " Show commands.
-nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
+nnoremap <silent><nowait> <space>cc  :<C-u>CocList commands<cr>
 " Find symbol of current document.
-nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
+nnoremap <silent><nowait> <space>co  :<C-u>CocList outline<cr>
 " Search workspace symbols.
-nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
-" Do default action for next item.
-nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
-" Do default action for previous item.
-nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
+nnoremap <silent><nowait> <space>cs  :<C-u>CocList -I symbols<cr>
 " Resume latest coc list.
-nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+nnoremap <silent><nowait> <space>cp  :<C-u>CocListResume<CR>
 
 "}}}
