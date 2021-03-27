@@ -1,3 +1,5 @@
+filetype plugin on
+
 " ============= Vim-Plug ============== "{{{
 
 " auto-install vim-plug
@@ -20,13 +22,17 @@ Plug 'vim-airline/vim-airline'                          " airline status bar
 " ================= Functionalities ================= "{{{
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}         " LSP and more
+
 Plug 'junegunn/fzf'                                     " fzf itself
 Plug 'junegunn/fzf.vim'                                 " fuzzy search integration
 
 Plug 'rust-lang/rust.vim'                               " better rust integration
 
 Plug 'tpope/vim-commentary'                             " better commenting
+
 Plug 'tpope/vim-fugitive'                               " git support
+Plug 'airblade/vim-gitgutter'                           " git gutter
+
 Plug 'psliwka/vim-smoothie'                             " some very smooth ass scrolling
 Plug 'tpope/vim-eunuch'                                 " run common Unix commands inside Vim
 Plug 'jiangmiao/auto-pairs'                             " autopairs (verify vim-closer)
@@ -35,6 +41,9 @@ Plug 'AndrewRadev/splitjoin.vim'                        " Split/Join oneliners i
 Plug 'easymotion/vim-easymotion'                        " Easy motion
 Plug 'terryma/vim-expand-region'                        " Expand regions increasingly
 
+Plug 'mg979/vim-visual-multi', {'branch': 'master'}     " multiple cursors
+Plug 't9md/vim-choosewin'                               " window pick
+
 call plug#end()
 
 "}}}
@@ -42,7 +51,7 @@ call plug#end()
 " ==================== general config ======================== "{{{
 
 set t_Co=256
-" set termguicolors                                       " Opaque Background
+"set termguicolors                                       " Opaque Background
 set mouse=a                                             " enable mouse scrolling
 set clipboard+=unnamedplus                              " use system clipboard by default
 set tabstop=4 softtabstop=4 shiftwidth=4 autoindent     " tab width
@@ -98,6 +107,8 @@ set signcolumn=yes
 " others
 set autoread " read when file is changed from outside
 
+" wildcards
+set wildignore+=*/target/*,*/tmp/*,*.swp,*.pyc,*__pycache__/*
 
 " Themeing
 set background=dark
@@ -108,6 +119,9 @@ let g:gruvbox_material_enable_italic=1
 
 syntax enable
 colorscheme gruvbox-material
+
+" highlight matching parenthesis
+hi MatchParen cterm=bold cterm=underline ctermfg=blue
 
 let &t_ZH="\e[3m"
 let &t_ZR="\e[23m"
@@ -158,11 +172,8 @@ let g:coc_snippet_prev = '<S-Tab>'
 
 " list of the extensions to make sure are always installed
 let g:coc_global_extensions = [
-            \'coc-pairs',
             \'coc-lists',
             \'coc-clangd',
-            \'coc-syntax',
-            \'coc-git',
             \'coc-highlight',
             \]
 
@@ -190,6 +201,9 @@ au FileType help wincmd L                               " open help in vertical 
 au BufWritePre * :%s/\s\+$//e                           " remove trailing whitespaces before saving
 au CursorHold * silent call CocActionAsync('highlight') " highlight match on cursor hold
 au FocusGained,BufEnter * checktime                     " when to check if file has been changed from outside
+
+" Term BufEnter
+autocmd TermOpen * startinsert
 
 " coc completion popup
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
@@ -225,6 +239,13 @@ command! -nargs=* -bang Rg call RipgrepFzf(<q-args>, <bang>0)
 " :W sudo saves the file
 command! W execute 'w !sudo tee % > /dev/null' <bar> edit!
 
+" scratch buffer commands
+command! Scratch call CreateScratchBuffer(1)
+command! Scratchh call CreateScratchBuffer(0)
+
+" timestamp
+command! TimeStamp call InsertDateStamp()
+
 "}}}
 
 " ================== Custom Functions ===================== "{{{
@@ -253,11 +274,38 @@ function! s:show_documentation()
   endif
 endfunction
 
+" scratch function
+function CreateScratchBuffer(vertical)
+    if a:vertical == 1
+        :vnew
+    else
+        :new
+    endif
+    :setlocal buftype=nofile
+    :setlocal bufhidden=hide
+    :setlocal noswapfile
+    :set ft=scratch
+endfunction
+
+function! InsertDateStamp()
+    let l:date = system('date +\%F')
+    let l:oneline_date = split(date, "\n")[0]
+    execute "normal! a" . oneline_date . "\<Esc>"
+endfunction
+
 "}}}
 
 " ======================== Custom Mappings ====================== "{{{
 
 "" main customs
+
+"" multiple cursors
+let g:VM_leader="\\"
+let g:VM_default_mappings = 0
+
+let g:VM_maps = {}
+let g:VM_maps['Find Under']         = '<M-j>'           " replace C-n
+let g:VM_maps['Find Subword Under'] = '<M-j>'           " replace visual C-n
 
 "" the essentials
 let mapleader=","
@@ -330,16 +378,8 @@ nmap <leader>cy <Plug>(coc-type-definition)
 nmap <leader>ci <Plug>(coc-implementation)
 nmap <leader>cr <Plug>(coc-references)
 
-" other coc actions
-
-" multiple cursors
-nmap <expr> <silent> <M-j> <SID>select_current_word()
-function! s:select_current_word()
-  if !get(b:, 'coc_cursors_activated', 0)
-    return "\<Plug>(coc-cursors-word)"
-  endif
-  return "*\<Plug>(coc-cursors-word):nohlsearch\<CR>"
-endfunc
+" Choosewin
+nmap - <Plug>(choosewin)
 
 " Use <c-space> to trigger completion.
 if has('nvim')
