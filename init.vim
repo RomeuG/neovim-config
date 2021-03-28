@@ -317,14 +317,19 @@ nmap <leader>q :bd<CR>
 nmap <leader>w :w<CR>
 map <leader>s :Format<CR>
 
+" buffer change
 nmap <Tab> :bnext<CR>
 nmap <S-Tab> :bprevious<CR>
 
+" home behavior
+map <Home> ^
+imap <Home> <Esc>^i
+
 " use a different register for delete and paste
-nnoremap d "_d
-vnoremap d "_d
-vnoremap p "_dP
-nnoremap x "_x
+" nnoremap d "_d
+" vnoremap d "_d
+" vnoremap p "_dP
+" nnoremap x "_x
 
 " " switch between splits using ctrl + shift + {left,right,up,down}
 noremap <C-S-Down> <C-W><C-J>
