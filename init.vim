@@ -1,7 +1,5 @@
 filetype plugin on
 
-" ============= Vim-Plug ============== "{{{
-
 " auto-install vim-plug
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
   silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
@@ -11,76 +9,105 @@ endif
 
 call plug#begin(expand('~/.config/nvim/plugged'))
 
-"}}}
 
-" ================= UI ============================== "{{{
+" theme
 Plug 'sainnhe/gruvbox-material'
-Plug 'vim-airline/vim-airline'                          " airline status bar
-
-"}}}
-
-" ================= Functionalities ================= "{{{
-
-Plug 'neoclide/coc.nvim', {'branch': 'release'}         " LSP and more
-
-Plug 'junegunn/fzf'                                     " fzf itself
-Plug 'junegunn/fzf.vim'                                 " fuzzy search integration
-
-Plug 'rust-lang/rust.vim'                               " better rust integration
-
-Plug 'tpope/vim-commentary'                             " better commenting
-
-Plug 'tpope/vim-fugitive'                               " git support
-Plug 'airblade/vim-gitgutter'                           " git gutter
-
-Plug 'psliwka/vim-smoothie'                             " some very smooth ass scrolling
-Plug 'tpope/vim-eunuch'                                 " run common Unix commands inside Vim
-Plug 'jiangmiao/auto-pairs'                             " autopairs (verify vim-closer)
-Plug 'machakann/vim-highlightedyank'                    " highlight yanked area
-Plug 'AndrewRadev/splitjoin.vim'                        " Split/Join oneliners into multiline
-Plug 'easymotion/vim-easymotion'                        " Easy motion
-Plug 'terryma/vim-expand-region'                        " Expand regions increasingly
-
-Plug 'mg979/vim-visual-multi', {'branch': 'master'}     " multiple cursors
-Plug 't9md/vim-choosewin'                               " window pick
+" airline status bar
+Plug 'vim-airline/vim-airline'
+" lsp
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" fzf itself
+Plug 'junegunn/fzf'
+" fuzzy search integration with fzf
+Plug 'junegunn/fzf.vim'
+" better rust integration
+Plug 'rust-lang/rust.vim'
+" better comments
+Plug 'tpope/vim-commentary'
+" git support
+Plug 'tpope/vim-fugitive'
+" git gutter
+Plug 'airblade/vim-gitgutter'
+" smooth scrolling
+Plug 'psliwka/vim-smoothie'
+" run common unix command in Vim
+Plug 'tpope/vim-eunuch'
+" autopairing
+Plug 'jiangmiao/auto-pairs'
+" highlight yanked area
+Plug 'machakann/vim-highlightedyank'
+" split and join oneliners into multiline
+Plug 'AndrewRadev/splitjoin.vim'
+" easier motion
+Plug 'easymotion/vim-easymotion'
+" expand regions increasingly
+Plug 'terryma/vim-expand-region'
+" multiple cursors
+Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+" window chooser
+Plug 't9md/vim-choosewin'
 
 call plug#end()
 
-"}}}
 
-" ==================== general config ======================== "{{{
-
+" terminal 256 colors
 set t_Co=256
-"set termguicolors                                       " Opaque Background
-set mouse=a                                             " enable mouse scrolling
-set clipboard+=unnamedplus                              " use system clipboard by default
-set tabstop=4 softtabstop=4 shiftwidth=4 autoindent     " tab width
-set expandtab smarttab                                  " tab key actions
-set incsearch ignorecase smartcase hlsearch             " highlight text while searching
-" set list listchars=trail:»,tab:»-                       " use tab to navigate in list mode
-set fillchars+=vert:\▏                                  " requires a patched nerd font (try FiraCode)
-set wrap breakindent                                    " wrap long lines to the width set by tw
-set encoding=utf-8                                      " text encoding
-set number                                              " enable numbers on the left
-set title                                               " tab title as file name
-set noshowcmd                                           " to get rid of display of last command
-set conceallevel=2                                      " set this so we wont break indentation plugin
-set splitright                                          " open vertical split to the right
-set splitbelow                                          " open horizontal split to the bottom
-set tw=90                                               " auto wrap lines that are longer than that
-set emoji                                               " enable emojis
-set history=1000                                        " history limit
-set backspace=indent,eol,start                          " sensible backspacing
-set undofile                                            " enable persistent undo
-set undodir=/tmp                                        " undo temp file directory
-set foldlevel=0                                         " open all folds by default
-set inccommand=nosplit                                  " visual feedback while substituting
-set showtabline=2                                       " always show tabline
-set grepprg=rg\ --vimgrep                               " use rg as default grepper
-set ruler                                               " current position
-set magic                                               " magic on for regex
-set showmatch                                           " show matching brackets
-set ffs=unix,dos,mac                                    " unix as standard file type
+" enable mouse
+set mouse=a
+" use system clipboard
+set clipboard+=unnamedplus
+" tabs
+set tabstop=4 softtabstop=4 shiftwidth=4 autoindent
+" tab key actions
+set expandtab smarttab
+" highlight text during search
+set incsearch ignorecase smartcase hlsearch
+" TODO
+set fillchars+=vert:\▏
+" wrap long lines set by tw
+set wrap breakindent
+" text encoding
+set encoding=utf-8
+" enable numbers
+set number
+" tab title = file name
+set title
+" don't display last command
+set noshowcmd
+" for indentation plugin
+set conceallevel=2
+" split to the right
+set splitright
+" split below
+set splitbelow
+" auto wrap lines after 90 chars
+set tw=90
+" enables emojis :-)
+set emoji
+" set history limit to 1000 lines
+set history=1000
+" mindful and sensible backspace
+set backspace=indent,eol,start
+" persistent undo
+set undofile
+" undo temporary directory
+set undodir=/tmp
+" open all folds by default
+set foldlevel=0
+" visual feedback while substituting
+set inccommand=nosplit
+" TODO always show tabline
+set showtabline=2
+" use rg as grep
+set grepprg=rg\ --vimgrep
+" show current position
+set ruler
+" magic on for regex
+set magic
+" show matching brackets, parenthesis, etc
+set showmatch
+" unix as standard file type
+set ffs=unix,dos,mac
 
 " no annoyances
 set noerrorbells
@@ -104,50 +131,70 @@ set updatetime=300
 set shortmess+=c
 set signcolumn=yes
 
-" others
-set autoread " read when file is changed from outside
+" read when file is changed from outside
+set autoread
 
-" wildcards
+" wildcards to ignore
 set wildignore+=*/target/*,*/tmp/*,*.swp,*.pyc,*__pycache__/*
 
-" Themeing
+" theme
 set background=dark
 
-" gruvbox material
+" gruvbox material settings
 let g:gruvbox_material_background='hard'
 let g:gruvbox_material_enable_italic=1
 
+" theme enable
 syntax enable
 colorscheme gruvbox-material
 
-" highlight matching parenthesis
+" highlight matching parenthesis with a more visible color
 hi MatchParen cterm=bold cterm=underline ctermfg=blue
 
+" italics
 let &t_ZH="\e[3m"
 let &t_ZR="\e[23m"
 
-"}}}
+"
+" --- Plugins ---
+"
 
-" ======================== Plugin Configurations ======================== "{{{
+"" built in plugins
+" disable netrw
+let loaded_netrw = 0
+" disable sql omni completion
+let g:omni_sql_no_default_maps = 1
+" disable python
+let g:loaded_python_provider = 0
+" disable perl
+let g:loaded_perl_provider = 0
+" disable ruby
+let g:loaded_ruby_provider = 0
+" define python3 binary
+let g:python3_host_prog = expand('/usr/bin/python3')
 
-" Airline
 
-" let g:airline_theme='material'
+"" Airline
+" do not render empty sections
 let g:airline_skip_empty_sections = 1
-"let g:airline_section_warning = ''
-"let g:airline_section_x=''
-let g:airline_section_z = airline#section#create(['%3p%% ', 'linenr', ':%c'])
+" file encoding skip expected string
 let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
+" enable tabline
 let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#buffer_min_count = 2   " show tabline only if there is more than 1 buffer
-let g:airline#extensions#tabline#fnamemod = ':t'        " show only file name on tabs
-let airline#extensions#coc#error_symbol = 'x:'
-let airline#extensions#coc#warning_symbol = '!:'
+" enable tabline only if there is more than 1 buffer
+let g:airline#extensions#tabline#buffer_min_count = 2
+" show only the filename in the tabline tabs
+let g:airline#extensions#tabline#fnamemod = ':t'
+" error symbol for coc
+let airline#extensions#coc#error_symbol = 'e:'
+" warning symbol for coc
+let airline#extensions#coc#warning_symbol = 'w:'
+" initialize airline symbols if not defined
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
 
-" unicode symbols
+" airline plaintext/unicode symbols
 let g:airline_symbols.branch = '⽀'
 let g:airline_symbols.dirty= ' ♯'
 let g:airline_left_sep = '▶'
@@ -156,53 +203,48 @@ let g:airline_symbols.linenr = '♩'
 let g:airline_symbols.paste = 'ρ'
 let g:airline_symbols.whitespace = 'Ξ'
 
-"" built in plugins
-let loaded_netrw = 0                                    " diable netew
-let g:omni_sql_no_default_maps = 1                      " disable sql omni completion
-let g:loaded_python_provider = 0
-let g:loaded_perl_provider = 0
-let g:loaded_ruby_provider = 0
-let g:python3_host_prog = expand('/usr/bin/python3')
-
 "" coc
-
-" Navigate snippet placeholders using tab
+" navigate snippet placeholders using tab
 let g:coc_snippet_next = '<Tab>'
 let g:coc_snippet_prev = '<S-Tab>'
-
 " list of the extensions to make sure are always installed
-let g:coc_global_extensions = [
-            \'coc-lists',
-            \'coc-clangd',
-            \'coc-highlight',
-            \]
+let g:coc_global_extensions = ['coc-lists', 'coc-clangd', 'coc-highlight']
 
-"" FZF
+"" fzf
+" fzf actions
 let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
   \ 'ctrl-x': 'split',
-  \ 'ctrl-v': 'vsplit' }
-
+  \ 'ctrl-v': 'vsplit'
+}
+" fzf layout
 let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.8, 'height': 0.8,'yoffset':0.5,'xoffset': 0.5, 'border': 'sharp' } }
+" fzf tag command (if available)
 let g:fzf_tags_command = 'ctags -R'
-
+" define fzf environment variables
 let $FZF_DEFAULT_OPTS = '--layout=reverse --inline-info'
 let $FZF_DEFAULT_COMMAND = "rg --files --hidden --glob '!.git/**' --glob '!build/**' --glob '!.dart_tool/**' --glob '!.idea' --glob '!node_modules'"
 
-" highlight yanked area
+"" highlightyank
+" highlight yanked area duration (1 second)
 let g:highlightedyank_highlight_duration = 1000
 
-"}}}
+"
+" --- Commands --
+"
 
-" ======================== Commands ============================= "{{{
+" don't auto comment on newlines
+au BufEnter * set fo-=c fo-=r fo-=o
+" help in vertical split
+au FileType help wincmd L
+" remove trailing whitespaces
+au BufWritePre * :%s/\s\+$//e
+" highlight match on cursor hold (coc)
+au CursorHold * silent call CocActionAsync('highlight')
+" when to check if the file has been changed in another program
+au FocusGained,BufEnter * checktime
 
-au BufEnter * set fo-=c fo-=r fo-=o                     " stop annoying auto commenting on new lines
-au FileType help wincmd L                               " open help in vertical split
-au BufWritePre * :%s/\s\+$//e                           " remove trailing whitespaces before saving
-au CursorHold * silent call CocActionAsync('highlight') " highlight match on cursor hold
-au FocusGained,BufEnter * checktime                     " when to check if file has been changed from outside
-
-" Term BufEnter
+" Insert mode when it enters terminal
 autocmd TermOpen * startinsert
 
 " coc completion popup
@@ -320,6 +362,9 @@ map <leader>s :Format<CR>
 " buffer change
 nmap <Tab> :bnext<CR>
 nmap <S-Tab> :bprevious<CR>
+
+" shift tab should remove 1 tab in insert mode
+inoremap <S-Tab> <C-D>
 
 " home behavior
 map <Home> ^
