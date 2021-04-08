@@ -208,15 +208,14 @@ let g:airline_symbols.whitespace = 'Ξ'
 let g:coc_snippet_next = '<Tab>'
 let g:coc_snippet_prev = '<S-Tab>'
 " list of the extensions to make sure are always installed
-let g:coc_global_extensions = ['coc-lists', 'coc-clangd', 'coc-highlight']
+let g:coc_global_extensions = ['coc-lists', 'coc-clangd', 'coc-highlight',]
 
 "" fzf
 " fzf actions
 let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
   \ 'ctrl-x': 'split',
-  \ 'ctrl-v': 'vsplit'
-}
+  \ 'ctrl-v': 'vsplit'}
 " fzf layout
 let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.8, 'height': 0.8,'yoffset':0.5,'xoffset': 0.5, 'border': 'sharp' } }
 " fzf tag command (if available)
@@ -254,7 +253,6 @@ autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 augroup folderarg
     " change working directory to passed directory
     autocmd VimEnter * if argc() != 0 && isdirectory(argv()[0]) | execute 'cd' fnameescape(argv()[0])  | endif
-
     " start fzf on passed directory
     autocmd VimEnter * if argc() != 0 && isdirectory(argv()[0]) | execute 'Files ' fnameescape(argv()[0]) | endif
 augroup END
@@ -288,9 +286,9 @@ command! Scratchh call CreateScratchBuffer(0)
 " timestamp
 command! TimeStamp call InsertDateStamp()
 
-"}}}
-
-" ================== Custom Functions ===================== "{{{
+"
+" --- Functions ---
+"
 
 " advanced grep(faster with preview)
 function! RipgrepFzf(query, fullscreen)
@@ -307,7 +305,7 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-" show docs on things with K
+" show docs on things with <S-k>
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
     execute 'h '.expand('<cword>')
@@ -329,34 +327,30 @@ function CreateScratchBuffer(vertical)
     :set ft=scratch
 endfunction
 
+" function to insert time stamp
 function! InsertDateStamp()
     let l:date = system('date +\%F')
     let l:oneline_date = split(date, "\n")[0]
     execute "normal! a" . oneline_date . "\<Esc>"
 endfunction
 
-"}}}
-
-" ======================== Custom Mappings ====================== "{{{
-
-"" main customs
-
-"" multiple cursors
-let g:VM_leader="\\"
-let g:VM_default_mappings = 0
-
-let g:VM_maps = {}
-let g:VM_maps['Find Under']         = '<M-j>'           " replace C-n
-let g:VM_maps['Find Subword Under'] = '<M-j>'           " replace visual C-n
+"
+" --- Mappings ---
+"
 
 "" the essentials
+" leader
 let mapleader=","
 
 nnoremap ; :
 
+" open config file
 nmap <leader>r :so ~/.config/nvim/init.vim<CR>
+" close buffer
 nmap <leader>q :bd<CR>
+" save
 nmap <leader>w :w<CR>
+" format (if available)
 map <leader>s :Format<CR>
 
 " buffer change
@@ -370,18 +364,12 @@ inoremap <S-Tab> <C-D>
 map <Home> ^
 imap <Home> <Esc>^i
 
-" use a different register for delete and paste
-" nnoremap d "_d
-" vnoremap d "_d
-" vnoremap p "_dP
-" nnoremap x "_x
-
-" " switch between splits using ctrl + shift + {left,right,up,down}
+" switch between splits using ctrl + shift + {left,right,up,down}
 noremap <C-S-Down> <C-W><C-J>
 nnoremap <C-S-Up> <C-W><C-K>
 nnoremap <C-S-Right> <C-W><C-L>
 nnoremap <C-S-Left> <C-W><C-H>
-
+" switch between splits
 nnoremap <C-h> <C-w>h
 noremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
@@ -390,19 +378,26 @@ nnoremap <C-l> <C-w>l
 " disable hl with 2 esc
 noremap <silent><esc> <esc>:noh<CR><esc>
 
-" trim white spaces
+" trim white spaces with F2
 nnoremap <F2> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
 
 " comments
 map <silent><nowait> <space>cl gc
 
-"" FZF
+"" fzf
+" show files
 nnoremap <silent> <leader>zf :Files<CR>
+" show buffers
 nmap <leader>zb :Buffers<CR>
+" show commands
 nmap <leader>zc :Commands<CR>
+" execute rg with fzf
 nmap <leader>/ :Rg<CR>
+" show commits
 nmap <leader>gc :Commits<CR>
+" show files under git
 nmap <leader>gs :GFiles?<CR>
+" show history
 nmap <leader>sh :History/<CR>
 
 " show mapping on all modes with F1
@@ -410,25 +405,32 @@ nmap <F1> <plug>(fzf-maps-n)
 imap <F1> <plug>(fzf-maps-i)
 vmap <F1> <plug>(fzf-maps-x)
 
-" multi cursor shortcuts
-nmap <silent> <C-a> <Plug>(coc-cursors-word)
-xmap <silent> <C-a> <Plug>(coc-cursors-range)
+"" multiple cursors
+let g:VM_leader="\\"
+let g:VM_default_mappings = 0
+" multiple cursors mappings
+let g:VM_maps = {}
+let g:VM_maps['Find Under']         = '<M-j>'
+let g:VM_maps['Find Subword Under'] = '<M-j>'
 
-" Use `[g` and `]g` to navigate diagnostics
+" Use [g and ]g to navigate diagnostics
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
-" other stuff
+" coc rename
 nmap <leader>rn <Plug>(coc-rename)
 nmap <leader>o :OR <CR>
 
-" jump stuff
+" coc jump to definition
 nmap <leader>cd <Plug>(coc-definition)
+" coc jump to type definition
 nmap <leader>cy <Plug>(coc-type-definition)
+" coc jump to implementation
 nmap <leader>ci <Plug>(coc-implementation)
+" coc jump to references (1 or multiple)
 nmap <leader>cr <Plug>(coc-references)
 
-" Choosewin
+" choosewin
 nmap - <Plug>(choosewin)
 
 " Use <c-space> to trigger completion.
@@ -455,4 +457,3 @@ nnoremap <silent><nowait> <space>cs  :<C-u>CocList -I symbols<cr>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>cp  :<C-u>CocListResume<CR>
 
-"}}}
