@@ -32,6 +32,8 @@ Plug 'airblade/vim-gitgutter'
 Plug 'psliwka/vim-smoothie'
 " run common unix command in Vim
 Plug 'tpope/vim-eunuch'
+" surround
+Plug 'tpope/vim-surround'
 " autopairing
 Plug 'jiangmiao/auto-pairs'
 " highlight yanked area
@@ -208,7 +210,7 @@ let g:airline_symbols.whitespace = 'Ξ'
 let g:coc_snippet_next = '<Tab>'
 let g:coc_snippet_prev = '<S-Tab>'
 " list of the extensions to make sure are always installed
-let g:coc_global_extensions = ['coc-lists', 'coc-clangd', 'coc-highlight',]
+let g:coc_global_extensions = ['coc-lists', 'coc-clangd', 'coc-highlight', 'coc-pyright',]
 
 "" fzf
 " fzf actions
@@ -231,6 +233,10 @@ let g:highlightedyank_highlight_duration = 1000
 "
 " --- Commands --
 "
+
+" define types to syntax highlighting
+" nasm
+autocmd BufNewFile,BufRead *.S,*.s,*.asm,*.inc set syntax=nasm
 
 " don't auto comment on newlines
 au BufEnter * set fo-=c fo-=r fo-=o
