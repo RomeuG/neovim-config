@@ -206,6 +206,8 @@ let g:airline_symbols.paste = 'ρ'
 let g:airline_symbols.whitespace = 'Ξ'
 
 "" coc
+" dont start on startup
+let g:coc_start_at_startup = v:false
 " navigate snippet placeholders using tab
 let g:coc_snippet_next = '<Tab>'
 let g:coc_snippet_prev = '<S-Tab>'
@@ -236,7 +238,7 @@ let g:highlightedyank_highlight_duration = 1000
 
 " define types to syntax highlighting
 " nasm
-autocmd BufNewFile,BufRead *.S,*.s,*.asm,*.inc set syntax=nasm
+autocmd BufNewFile,BufRead *.S,*.s,*.asm,*.inc set filetype=asm syntax=nasm commentstring=;\%s
 
 " don't auto comment on newlines
 au BufEnter * set fo-=c fo-=r fo-=o
