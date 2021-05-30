@@ -35,7 +35,7 @@ Plug 'tpope/vim-eunuch'
 " surround
 Plug 'tpope/vim-surround'
 " autopairing
-Plug 'jiangmiao/auto-pairs'
+Plug 'LukeLike/auto-pairs'
 " highlight yanked area
 Plug 'machakann/vim-highlightedyank'
 " split and join oneliners into multiline
@@ -50,7 +50,6 @@ Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 't9md/vim-choosewin'
 
 call plug#end()
-
 
 " terminal 256 colors
 set t_Co=256
@@ -175,8 +174,10 @@ let g:loaded_ruby_provider = 0
 " define python3 binary
 let g:python3_host_prog = expand('/usr/bin/python3')
 
+"" autopairs
+let g:AutoPairsCenterLine = 0
 
-"" Airline
+" Airline
 " do not render empty sections
 let g:airline_skip_empty_sections = 1
 " file encoding skip expected string
@@ -464,4 +465,3 @@ nnoremap <silent><nowait> <space>co  :<C-u>CocList outline<cr>
 nnoremap <silent><nowait> <space>cs  :<C-u>CocList -I symbols<cr>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>cp  :<C-u>CocListResume<CR>
-
