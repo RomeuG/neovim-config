@@ -10,12 +10,17 @@ endif
 call plug#begin(expand('~/.config/nvim/plugged'))
 
 
+" treesitter TODO: to be installed...
+" Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 " theme
 Plug 'sainnhe/gruvbox-material'
 " airline status bar
 Plug 'vim-airline/vim-airline'
 " lsp
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" latex
+Plug 'lervag/vimtex'
+Plug 'matze/vim-tex-fold'
 " fzf itself
 Plug 'junegunn/fzf'
 " fuzzy search integration with fzf
@@ -35,7 +40,7 @@ Plug 'tpope/vim-eunuch'
 " surround
 Plug 'tpope/vim-surround'
 " autopairing
-Plug 'LukeLike/auto-pairs'
+Plug 'cohama/lexima.vim'
 " highlight yanked area
 Plug 'machakann/vim-highlightedyank'
 " split and join oneliners into multiline
@@ -151,6 +156,8 @@ colorscheme gruvbox-material
 
 " highlight matching parenthesis with a more visible color
 hi MatchParen cterm=bold cterm=underline ctermfg=blue
+" highlight vimtex conceal with better colors
+hi Conceal ctermfg=red
 
 " italics
 let &t_ZH="\e[3m"
@@ -173,9 +180,6 @@ let g:loaded_perl_provider = 0
 let g:loaded_ruby_provider = 0
 " define python3 binary
 let g:python3_host_prog = expand('/usr/bin/python3')
-
-"" autopairs
-let g:AutoPairsCenterLine = 0
 
 " Airline
 " do not render empty sections
@@ -213,7 +217,8 @@ let g:coc_start_at_startup = v:false
 let g:coc_snippet_next = '<Tab>'
 let g:coc_snippet_prev = '<S-Tab>'
 " list of the extensions to make sure are always installed
-let g:coc_global_extensions = ['coc-lists', 'coc-clangd', 'coc-highlight', 'coc-pyright',]
+let g:coc_global_extensions = ['coc-lists', 'coc-clangd', 'coc-highlight', 'coc-pyright', 'coc-vimtex',]
+let g:coc_filetype_map = {'latex': 'tex'}
 
 "" fzf
 " fzf actions
@@ -233,7 +238,40 @@ let $FZF_DEFAULT_COMMAND = "rg --files --hidden --glob '!.git/**' --glob '!build
 " highlight yanked area duration (1 second)
 let g:highlightedyank_highlight_duration = 1000
 
-"
+"" lexima auto pairing
+" taken from (https://github.com/cohama/lexima.vim/issues/117)
+" auto complete for "
+call lexima#add_rule({'char': '"', 'at': '\%#', 'input_after': '"'})
+" when before word character then insert just one "
+call lexima#add_rule({'char': '"', 'at': '\%#\w', 'leave': 1})
+" when after word character then insert just one "
+call lexima#add_rule({'char': '"', 'at': '\w\%#', 'leave': 1})
+" when after a word and before " jump over
+call lexima#add_rule({'char': '"', 'at': '\w\%#"', 'input': '<Right>'})
+" when in the middle of "|" then delete both
+call lexima#add_rule({'char': '<BS>', 'at': '"\%#"', 'input': "<Right><BS><BS>"})
+" when backspacing empty "", delete both
+call lexima#add_rule({'char': '<BS>', 'at': '""\%#', 'input': "<BS><BS>"})
+
+call lexima#add_rule({'char': '{', 'at': '\%#\w', 'leave': 1})
+
+call lexima#add_rule({'char': '[', 'at': '\%#\w', 'leave': 1})
+
+call lexima#add_rule({'char': '''', 'at': '\%#', 'input_after': ''''})
+call lexima#add_rule({'char': '''', 'at': '\%#\w', 'leave': 1})
+call lexima#add_rule({'char': '''', 'at': '\w\%#', 'leave': 1})
+call lexima#add_rule({'char': '<BS>', 'at': '''\%#''', 'input': "<Right><BS><BS>"}) " keyboard presses must be between double quotes
+call lexima#add_rule({'char': '<BS>', 'at': '''''\%#', 'input': "<BS><BS>"}) " keyboard presses must be between double quotes
+
+
+"" vimtex
+let g:conceallevel=1
+let g:tex_flavor='latex'
+let g:tex_conceal='abdmg'
+
+let g:vimtex_view_method='zathura'
+let g:vimtex_quickfix_mode=0
+
 " --- Commands --
 "
 
