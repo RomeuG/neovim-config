@@ -34,6 +34,9 @@
     "git.removedSign.text": "▌",
     "git.addedSign.text": "▌",
     "git.changedSign.text": "▌",
+    // snippets
+    "snippets.autoTrigger": false,
+    "snippets.ultisnips.directories": ["/home/romeu/.config/nvim/UltiSnips"],
     // coc-html
     "html.autoClosingTags": true,
     "html.format.wrapLineLength": 0,
