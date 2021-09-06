@@ -40,5 +40,7 @@
     "html.format.indentInnerHtml": true,
     "html.suggest.angular1": false,
     "html.suggest.ionic": false,
+    // coc-rust-analyzer
+    "rust-analyzer.runnables.cargoExtraArgs": ["+nightly"],
     "coc.source.ultisnips.filetypes": []
 }
