@@ -45,14 +45,14 @@ local on_attach = function(client, bufnr)
     vim.api.nvim_set_keymap('n', 'gd', '<cmd>lua Show_line_diagnostics()<CR>', opts)
 
     -- formatting
-    if client.resolved_capabilities.document_formatting then
-        vim.api.nvim_set_keymap('n', '<leader>ff', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
-    end
+    -- if client.resolved_capabilities.document_formatting then
+    --     vim.api.nvim_set_keymap('n', '<leader>ff', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+    -- end
 
     -- range formatting
-    if client.resolved_capabilities.document_range_formatting then
-        vim.api.nvim_set_keymap('v', '<leader>ff', '<cmd>lua vim.lsp.buf.range_formatting()<CR>', opts)
-    end
+    -- if client.resolved_capabilities.document_range_formatting then
+    --     vim.api.nvim_set_keymap('v', '<leader>ff', '<cmd>lua vim.lsp.buf.range_formatting()<CR>', opts)
+    -- end
 
     -- document highlight
     if client.resolved_capabilities.document_highlight then
@@ -155,9 +155,7 @@ end
 vim.api.nvim_exec([[
 
 " Format
-command! Format execute 'lua vim.lsp.buf.formatting()'
-
-autocmd BufWritePre *.rs,*.c,*.tex Format
+" command! Format execute 'lua vim.lsp.buf.formatting()'
 
 " inlay hints
 " nnoremap <Leader>T :lua require'lsp_extensions'.inlay_hints()

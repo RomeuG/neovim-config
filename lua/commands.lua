@@ -1,5 +1,6 @@
 -- commands
-vim.api.nvim_exec([[
+vim.api.nvim_exec(
+	[[
 
 " help in vertical split
 au FileType help wincmd L
@@ -35,4 +36,6 @@ command! Scratchh call CreateScratchBuffer(0)
 " timestamp
 command! TimeStamp call InsertDateStamp()
 
-]], false)
+]],
+	false
+)

@@ -1,55 +1,60 @@
 -- Fzf object
-local Fzf = require('fzf-lua')
-local FzfActions = require('fzf-lua.actions')
+local Fzf = require("fzf-lua")
+local FzfActions = require("fzf-lua.actions")
 
-vim.env.FZF_DEFAULT_OPTS = '--layout=reverse --inline-info'
-vim.env.FZF_DEFAULT_COMMAND = "rg --files --hidden --glob '!.git/**' --glob '!build/**' --glob '!.dart_tool/**' --glob '!.idea' --glob '!node_modules'"
+vim.env.FZF_DEFAULT_OPTS = "--layout=reverse --inline-info"
+vim.env.FZF_DEFAULT_COMMAND =
+	"rg --files --hidden --glob '!.git/**' --glob '!build/**' --glob '!.dart_tool/**' --glob '!.idea' --glob '!node_modules'"
 Fzf.setup({
-    files = {
-        actions = {
-            ["ctrl-x"] = FzfActions.file_split,
-            ["ctrl-v"] = FzfActions.file_vsplit,
-        },
-    },
-    git = {
-        status = {
-            actions = {
-                ["ctrl-x"] = FzfActions.file_split,
-                ["ctrl-v"] = FzfActions.file_vsplit,
-            },
-        },
-    },
-    keymap = {
-        builtin = {
-            ["S-down"] = "preview-page-down",
-            ["S-up"] = "preview-page-up",
-        },
-    },
+	files = {
+		actions = {
+			["ctrl-x"] = FzfActions.file_split,
+			["ctrl-v"] = FzfActions.file_vsplit,
+		},
+	},
+	git = {
+		status = {
+			actions = {
+				["ctrl-x"] = FzfActions.file_split,
+				["ctrl-v"] = FzfActions.file_vsplit,
+			},
+		},
+	},
+	keymap = {
+		builtin = {
+			["S-down"] = "preview-page-down",
+			["S-up"] = "preview-page-up",
+		},
+	},
 })
-
 
 -- Commands
 -- show files
-vim.api.nvim_set_keymap('n', '<leader>zF', "<cmd>lua require('fzf-lua').files()<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>zF", "<cmd>lua require('fzf-lua').files()<CR>", { noremap = true, silent = true })
 -- show buffers
-vim.api.nvim_set_keymap('n', '<leader>zb', "<cmd>lua require('fzf-lua').buffers()<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap(
+	"n",
+	"<leader>zb",
+	"<cmd>lua require('fzf-lua').buffers()<CR>",
+	{ noremap = true, silent = true }
+)
 -- show commands
-vim.api.nvim_set_keymap('n', '<leader>zc', "<cmd>lua require('fzf-lua').commands()<CR>", {})
+vim.api.nvim_set_keymap("n", "<leader>zc", "<cmd>lua require('fzf-lua').commands()<CR>", {})
 -- manpages
-vim.api.nvim_set_keymap('n', '<leader>zm', "<cmd>lua require('fzf-lua').man_pages()<CR>", {})
+vim.api.nvim_set_keymap("n", "<leader>zm", "<cmd>lua require('fzf-lua').man_pages()<CR>", {})
 -- execute rg with fzf
-vim.api.nvim_set_keymap('n', '<leader>/', "<cmd>lua require('fzf-lua').grep_project()<CR>", {})
+vim.api.nvim_set_keymap("n", "<leader>/", "<cmd>lua require('fzf-lua').grep_project()<CR>", {})
 
 -- show commits
-vim.api.nvim_set_keymap('n', '<leader>gc', "<cmd>lua require('fzf-lua').git_commits()<CR>", {})
+vim.api.nvim_set_keymap("n", "<leader>gc", "<cmd>lua require('fzf-lua').git_commits()<CR>", {})
 -- show files under git
-vim.api.nvim_set_keymap('n', '<leader>gf', "<cmd>lua require('fzf-lua').git_files()<CR>", {})
+vim.api.nvim_set_keymap("n", "<leader>gf", "<cmd>lua require('fzf-lua').git_files()<CR>", {})
 
 -- show mappings
-vim.api.nvim_set_keymap('n', '<F1>', "<cmd>lua require('fzf-lua').keymaps()<CR>", {})
+vim.api.nvim_set_keymap("n", "<F1>", "<cmd>lua require('fzf-lua').keymaps()<CR>", {})
 
-
-vim.api.nvim_exec([[
+vim.api.nvim_exec(
+	[[
 
 command! FzfBuffers execute "lua require('fzf-lua').buffers()"
 command! FzfFiles execute "lua require('fzf-lua').files()"
@@ -111,4 +116,6 @@ command! FzfMiscBtags execute "lua require('fzf-lua').btags()"
 command! FzfMiscFiletypes execute "lua require('fzf-lua').filetypes()"
 command! FzfMiscPackadd execute "lua require('fzf-lua').packadd()"
 
-]], false)
+]],
+	false
+)

@@ -1,17 +1,20 @@
 function Tdump(o)
-   if type(o) == 'table' then
-      local s = '{ '
-      for k,v in pairs(o) do
-         if type(k) ~= 'number' then k = '"'..k..'"' end
-         s = s .. '['..k..'] = ' .. Tdump(v) .. ','
-      end
-      return s .. '} '
-   else
-      return tostring(o)
-   end
+	if type(o) == "table" then
+		local s = "{ "
+		for k, v in pairs(o) do
+			if type(k) ~= "number" then
+				k = '"' .. k .. '"'
+			end
+			s = s .. "[" .. k .. "] = " .. Tdump(v) .. ","
+		end
+		return s .. "} "
+	else
+		return tostring(o)
+	end
 end
 
-vim.api.nvim_exec([[
+vim.api.nvim_exec(
+	[[
 
 " show docs on things with <S-k>
 function! Show_documentation()
@@ -42,4 +45,6 @@ function! InsertDateStamp()
     execute "normal! a" . oneline_date . "\<Esc>"
 endfunction
 
-]], false)
+]],
+	false
+)
