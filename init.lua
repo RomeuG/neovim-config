@@ -64,7 +64,7 @@ Plug("hrsh7th/cmp-path")
 Plug("hrsh7th/nvim-cmp")
 
 -- formatter
-Plug("pappasam/vim-filetype-formatter")
+Plug("sbdchd/neoformat")
 
 -- UltiSnips
 Plug("SirVer/ultisnips")

@@ -1,10 +1,29 @@
 -- formatter
-vim.api.nvim_exec([[
+-- vim.api.nvim_exec(
+-- 	[[
 
-let g:vim_filetype_formatter_commands = {
-      \ 'lua': 'stylua -',
-      \ }
+-- let g:vim_filetype_formatter_commands = {
+--       \ 'lua': 'stylua -',
+--       \ }
 
-autocmd BufWritePre *.rs,*.c,*.tex,*.py,*.lua FiletypeFormat
+-- augroup FORMATTING
+--     autocmd BufWritePre *.rs,*.c,*.tex,*.py,*.lua FiletypeFormat
+-- augroup END
 
-]], false)
+-- " autocmd! FORMATTING BufWritePre *
+
+-- ]],
+-- 	false
+-- )
+
+vim.api.nvim_exec(
+	[[
+augroup FORMATTING
+  autocmd!
+  autocmd BufWritePre * undojoin | Neoformat
+augroup END
+
+" autocmd! FORMATTING BufWritePre *
+]],
+	false
+)

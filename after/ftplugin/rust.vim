@@ -26,3 +26,6 @@ map <C-b> :!clear; cargo check<CR>
 " abbreviations
 abclear
 "ia dd #[derive(Debug)]
+
+" disable formatting
+" autocmd! FORMATTING

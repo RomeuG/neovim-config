@@ -3,7 +3,7 @@ local TreeSitter = require("nvim-treesitter.configs")
 
 -- treesitter
 TreeSitter.setup({
-	ensure_installed = { "rust", "c", "lua", "python" },
+	ensure_installed = { "rust", "c", "lua", "python", "css" },
 	highlight = {
 		enable = true,
 		additional_vim_regex_highlighting = false,
