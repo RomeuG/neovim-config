@@ -35,3 +35,12 @@ vim.api.nvim_set_keymap("", "<esc>", "<esc>:noh<CR><esc>", { noremap = true, sil
 
 -- trim white spaces with F2
 vim.api.nvim_set_keymap("n", "<F2>", ":let _s=@/<Bar>:%s/\\s\\+$//e<Bar>:let @/=_s<Bar><CR>", { noremap = true })
+
+-- vertical movement empty lines with C-Up/C-Down
+vim.api.nvim_set_keymap("", "<C-Up>", "<C-{>", {})
+vim.api.nvim_set_keymap("", "<C-Down>", "<C-}>", {})
+vim.api.nvim_set_keymap("i", "<C-Up>", "<esc><C-{>i", {})
+vim.api.nvim_set_keymap("i", "<C-Down>", "<esc><C-}>i", {})
+
+-- backspace behaviour in normal mode
+vim.api.nvim_set_keymap("n", "<BS>", "i<BS><esc>`^", {})
