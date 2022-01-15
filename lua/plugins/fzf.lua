@@ -5,7 +5,13 @@ local FzfActions = require("fzf-lua.actions")
 vim.env.FZF_DEFAULT_OPTS = "--layout=reverse --inline-info"
 vim.env.FZF_DEFAULT_COMMAND =
 	"rg --files --hidden --glob '!.git/**' --glob '!build/**' --glob '!.dart_tool/**' --glob '!.idea' --glob '!node_modules'"
+
 Fzf.setup({
+	previewers = {
+		man = {
+			cmd = "man %s | col -bx",
+		},
+	},
 	files = {
 		actions = {
 			["ctrl-x"] = FzfActions.file_split,
@@ -22,8 +28,12 @@ Fzf.setup({
 	},
 	keymap = {
 		builtin = {
-			["S-down"] = "preview-page-down",
-			["S-up"] = "preview-page-up",
+			["<PageDown>"] = "preview-page-down",
+			["<PageUp>"] = "preview-page-up",
+		},
+		fzf = {
+			["shift-down"] = "preview-page-down",
+			["shift-up"] = "preview-page-up",
 		},
 	},
 })
