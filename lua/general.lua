@@ -24,7 +24,7 @@ vim.opt.breakindent = true
 -- text encoding
 vim.opt.encoding = 'utf-8'
 -- enable numbers
-vim.opt.number = true
+vim.opt.number = false
 -- tab title = file name
 vim.opt.title = true
 -- dont display last command

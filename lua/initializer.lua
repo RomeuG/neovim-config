@@ -12,6 +12,7 @@ require("plugins.lualine")
 require("plugins.lexima")
 require("plugins.highlightedyank")
 require("plugins.ultisnips")
+require("plugins.gutter")
 
 require("plugins.cmp")
 require("plugins.lsp")
