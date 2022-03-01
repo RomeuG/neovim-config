@@ -77,6 +77,9 @@ Plug("Shatur/neovim-session-manager")
 -- choosewin
 Plug("t9md/vim-choosewin")
 
+-- indent lines
+Plug("lukas-reineke/indent-blankline.nvim")
+
 vim.call("plug#end")
 
 require("initializer")
