@@ -1,41 +1,71 @@
--- commands
-vim.api.nvim_exec(
-	[[
+--
+-- autocommands
+--
 
-" help in vertical split
-au FileType help wincmd L
+-- help in vertical split
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "help",
+	command = "wincmd L",
+})
 
-" nasm
-autocmd BufNewFile,BufRead *.S,*.s,*.asm,*.inc set filetype=asm syntax=nasm commentstring=;\%s
+-- when to check if the file has been changed in another program
+vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter" }, {
+	pattern = "*",
+	command = "checktime",
+})
 
-" remove trailing whitespaces
-au BufWritePre * :%s/\s\+$//e
+-- insert mode when it enters terminal
+vim.api.nvim_create_autocmd("TermOpen", {
+	pattern = "*",
+	command = "startinsert",
+})
 
-" don't auto comment on newlines
-au BufEnter * set fo-=c fo-=r fo-=o
+vim.api.nvim_create_autocmd("BufReadPost", {
+	pattern = "*",
+	command = [[
+     if line("'\"") > 0 && line("'\"") <= line("$")
+         exe "normal! g`\""
+     endif
+    ]],
+})
 
-" when to check if the file has been changed in another program
-au FocusGained,BufEnter * checktime
+-- nasm
+vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+	pattern = { "*.S", "*.s", "*.asm", "*.inc" },
+	command = "set filetype=asm syntax=nasm commentstring=;\\%s",
+})
 
-" Insert mode when it enters terminal
-autocmd TermOpen * startinsert
+-- remove trailing whitespaces
+vim.api.nvim_create_autocmd("BufWritePre", {
+	pattern = "*",
+	command = ":%s/\\s\\+$//e",
+})
 
-" Return to last edit position when opening files
-autocmd BufReadPost *
-     \ if line("'\"") > 0 && line("'\"") <= line("$") |
-     \   exe "normal! g`\"" |
-     \ endif
+-- do not autocoment on newlines
+vim.api.nvim_create_autocmd("BufEnter", {
+	pattern = "*",
+	command = "set fo-=c fo-=r fo-=o",
+})
 
-" :W sudo saves the file
-command! W execute 'w !sudo tee % > /dev/null' <bar> edit!
+-- exit quickfix window on enter keypress
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "qf",
+	command = "nnoremap <buffer> <CR> <CR>:cclose<CR>",
+})
 
-" scratch buffer commands
-command! Scratch call CreateScratchBuffer(1)
-command! Scratchh call CreateScratchBuffer(0)
+--
+-- user commands
+--
 
-" timestamp
-command! TimeStamp call InsertDateStamp()
+vim.api.nvim_create_user_command("Scratch", function()
+    vim.cmd("call CreateScratchBuffer(1)")
+end, {})
 
-]],
-	false
-)
+vim.api.nvim_create_user_command("Scratchh", function()
+    vim.cmd("call CreateScratchBuffer(0)")
+end, {})
+
+vim.api.nvim_create_user_command("TimeStamp", function()
+	vim.cmd("call InsertDateStamp()")
+end, {})
+

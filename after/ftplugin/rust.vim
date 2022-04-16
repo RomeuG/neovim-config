@@ -27,5 +27,10 @@ map <C-b> :!clear; cargo check<CR>
 abclear
 "ia dd #[derive(Debug)]
 
+" mapping
+map <F5> :Cargo build<CR>
+map <F6> :Cargo run<CR>
+map <F7> :Cargo clean<CR>
+
 " disable formatting
 " autocmd! FORMATTING

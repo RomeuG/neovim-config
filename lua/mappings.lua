@@ -37,10 +37,10 @@ vim.api.nvim_set_keymap("", "<esc>", "<esc>:noh<CR><esc>", { noremap = true, sil
 vim.api.nvim_set_keymap("n", "<F2>", ":let _s=@/<Bar>:%s/\\s\\+$//e<Bar>:let @/=_s<Bar><CR>", { noremap = true })
 
 -- vertical movement empty lines with C-Up/C-Down
-vim.api.nvim_set_keymap("", "<C-Up>", "<C-{>", {})
-vim.api.nvim_set_keymap("", "<C-Down>", "<C-}>", {})
-vim.api.nvim_set_keymap("i", "<C-Up>", "<esc><C-{>i", {})
-vim.api.nvim_set_keymap("i", "<C-Down>", "<esc><C-}>i", {})
+vim.api.nvim_set_keymap("n", "<C-Up>", "<S-{>", { noremap = true })
+vim.api.nvim_set_keymap("n", "<C-Down>", "<S-}>", { noremap = true })
+vim.api.nvim_set_keymap("i", "<C-Up>", "<esc><S-{>i", {})
+vim.api.nvim_set_keymap("i", "<C-Down>", "<esc><S-}>i", {})
 
 -- backspace behaviour in normal mode
 vim.api.nvim_set_keymap("n", "<BS>", "i<BS><esc>`^", {})

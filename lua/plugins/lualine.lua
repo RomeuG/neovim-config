@@ -58,6 +58,7 @@ LuaLine.setup({
         always_divide_middle = false,
         icons_enabled = false,
         theme = M.theme(),
+        disabled_filetypes = { "NvimTree" },
     },
     sections = {
         lualine_b = { 'branch', 'diff',

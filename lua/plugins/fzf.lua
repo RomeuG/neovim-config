@@ -63,69 +63,64 @@ vim.api.nvim_set_keymap("n", "<leader>gf", "<cmd>lua require('fzf-lua').git_file
 -- show mappings
 vim.api.nvim_set_keymap("n", "<F1>", "<cmd>lua require('fzf-lua').keymaps()<CR>", {})
 
-vim.api.nvim_exec(
-	[[
+-- commands
 
-command! FzfBuffers execute "lua require('fzf-lua').buffers()"
-command! FzfFiles execute "lua require('fzf-lua').files()"
-command! FzfOldfiles execute "lua require('fzf-lua').oldfiles()"
-command! FzfQuickfix execute "lua require('fzf-lua').quickfix()"
-command! FzfLoclist execute "lua require('fzf-lua').loclist()"
-command! FzfLines execute "lua require('fzf-lua').lines()"
-command! FzfBlines execute "lua require('fzf-lua').blines()"
-command! FzfTabs execute "lua require('fzf-lua').tabs()"
-command! FzfArgs execute "lua require('fzf-lua').args()"
+vim.api.nvim_create_user_command("FzfBuffers", require('fzf-lua').buffers, {})
+vim.api.nvim_create_user_command("FzfFiles", require('fzf-lua').files, {})
+vim.api.nvim_create_user_command("FzfOldfiles", require('fzf-lua').oldfiles, {})
+vim.api.nvim_create_user_command("FzfQuickfix", require('fzf-lua').quickfix, {})
+vim.api.nvim_create_user_command("FzfLoclist", require('fzf-lua').loclist, {})
+vim.api.nvim_create_user_command("FzfLines", require('fzf-lua').lines, {})
+vim.api.nvim_create_user_command("FzfBlines", require('fzf-lua').blines, {})
+vim.api.nvim_create_user_command("FzfTabs", require('fzf-lua').tabs, {})
+vim.api.nvim_create_user_command("FzfArgs", require('fzf-lua').args, {})
 
-command! FzfGrep execute "lua require('fzf-lua').grep()"
-command! FzfGrepLast execute "lua require('fzf-lua').grep_last()"
-command! FzfGrepCword execute "lua require('fzf-lua').grep_cword()"
-command! FzfGrepCWORD execute "lua require('fzf-lua').grep_cWORD()"
-command! FzfGrepVisual execute "lua require('fzf-lua').grep_visual()"
-command! FzfGrepProject execute "lua require('fzf-lua').grep_project()"
-command! FzfGrepCurbuf execute "lua require('fzf-lua').grep_curbuf()"
-command! FzfGrepLiveCurbuf execute "lua require('fzf-lua').lgrep_curbuf()"
-command! FzfGrepLive execute "lua require('fzf-lua').live_grep()"
-command! FzfGrepLiveResume execute "lua require('fzf-lua').live_grep_resume()"
-command! FzfGrepLiveGlob execute "lua require('fzf-lua').live_grep_glob()"
-command! FzfGrepLiveNative execute "lua require('fzf-lua').live_grep_native()"
+vim.api.nvim_create_user_command("FzfGrep", require('fzf-lua').grep, {})
+vim.api.nvim_create_user_command("FzfGrepLast", require('fzf-lua').grep_last, {})
+vim.api.nvim_create_user_command("FzfGrepCword", require('fzf-lua').grep_cword, {})
+vim.api.nvim_create_user_command("FzfGrepCWORD", require('fzf-lua').grep_cWORD, {})
+vim.api.nvim_create_user_command("FzfGrepVisual", require('fzf-lua').grep_visual, {})
+vim.api.nvim_create_user_command("FzfGrepProject", require('fzf-lua').grep_project, {})
+vim.api.nvim_create_user_command("FzfGrepCurbuf", require('fzf-lua').grep_curbuf, {})
+vim.api.nvim_create_user_command("FzfGrepLiveCurbuf", require('fzf-lua').lgrep_curbuf, {})
+vim.api.nvim_create_user_command("FzfGrepLive", require('fzf-lua').live_grep, {})
+vim.api.nvim_create_user_command("FzfGrepLiveResume", require('fzf-lua').live_grep_resume, {})
+vim.api.nvim_create_user_command("FzfGrepLiveGlob", require('fzf-lua').live_grep_glob, {})
+vim.api.nvim_create_user_command("FzfGrepLiveNative", require('fzf-lua').live_grep_native, {})
 
-command! FzfGitFiles execute "lua require('fzf-lua').git_files()"
-command! FzfGitStatus execute "lua require('fzf-lua').git_status()"
-command! FzfGitCommits execute "lua require('fzf-lua').git_commits()"
-command! FzfGitBcommits execute "lua require('fzf-lua').git_bcommits()"
-command! FzfGitBranches execute "lua require('fzf-lua').git_branches()"
+vim.api.nvim_create_user_command("FzfGitFiles", require('fzf-lua').git_files, {})
+vim.api.nvim_create_user_command("FzfGitStatus", require('fzf-lua').git_status, {})
+vim.api.nvim_create_user_command("FzfGitCommits", require('fzf-lua').git_commits, {})
+vim.api.nvim_create_user_command("FzfGitBcommits", require('fzf-lua').git_bcommits, {})
+vim.api.nvim_create_user_command("FzfGitBranches", require('fzf-lua').git_branches, {})
 
-command! FzfLspReferences execute "lua require('fzf-lua').lsp_references()"
-command! FzfLspDefinitions execute "lua require('fzf-lua').lsp_definitions()"
-command! FzfLspDeclarations execute "lua require('fzf-lua').lsp_declarations()"
-command! FzfLspTypedefs execute "lua require('fzf-lua').lsp_typedefs()"
-command! FzfLspImplementations execute "lua require('fzf-lua').lsp_implementations()"
-command! FzfLspDocumentSymbols execute "lua require('fzf-lua').lsp_document_symbols()"
-command! FzfLspWorkspaceSymbols execute "lua require('fzf-lua').lsp_workspace_symbols()"
-command! FzfLspLiveWorkspaceSymbols execute "lua require('fzf-lua').lsp_live_workspace_symbols()"
-command! FzfLspCodeActions execute "lua require('fzf-lua').lsp_code_actions()"
-command! FzfLspDocumentDiagnostics execute "lua require('fzf-lua').lsp_document_diagnostics()"
-command! FzfLspWorkspaceDiagnostics execute "lua require('fzf-lua').lsp_workspace_diagnostics()"
+vim.api.nvim_create_user_command("FzfLspReferences", require('fzf-lua').lsp_references, {})
+vim.api.nvim_create_user_command("FzfLspDefinitions", require('fzf-lua').lsp_definitions, {})
+vim.api.nvim_create_user_command("FzfLspDeclarations", require('fzf-lua').lsp_declarations, {})
+vim.api.nvim_create_user_command("FzfLspTypedefs", require('fzf-lua').lsp_typedefs, {})
+vim.api.nvim_create_user_command("FzfLspImplementations", require('fzf-lua').lsp_implementations, {})
+vim.api.nvim_create_user_command("FzfLspDocumentSymbols", require('fzf-lua').lsp_document_symbols, {})
+vim.api.nvim_create_user_command("FzfLspWorkspaceSymbols", require('fzf-lua').lsp_workspace_symbols, {})
+vim.api.nvim_create_user_command("FzfLspLiveWorkspaceSymbols", require('fzf-lua').lsp_live_workspace_symbols, {})
+vim.api.nvim_create_user_command("FzfLspCodeActions", require('fzf-lua').lsp_code_actions, {})
+vim.api.nvim_create_user_command("FzfLspDocumentDiagnostics", require('fzf-lua').lsp_document_diagnostics, {})
+vim.api.nvim_create_user_command("FzfLspWorkspaceDiagnostics", require('fzf-lua').lsp_workspace_diagnostics, {})
 
-command! FzfMiscResume execute "lua require('fzf-lua').resume()"
-command! FzfMiscBuiltin execute "lua require('fzf-lua').builtin()"
-command! FzfMiscHelpTags execute "lua require('fzf-lua').help_tags()"
-command! FzfMiscManPages execute "lua require('fzf-lua').man_pages()"
-command! FzfMiscColorschemes execute "lua require('fzf-lua').colorschemes()"
-command! FzfMiscCommands execute "lua require('fzf-lua').commands()"
-command! FzfMiscCommandHistory execute "lua require('fzf-lua').command_history()"
-command! FzfMiscSearchHistory execute "lua require('fzf-lua').search_history()"
-command! FzfMiscMarks execute "lua require('fzf-lua').marks()"
-command! FzfMiscJumps execute "lua require('fzf-lua').jumps()"
-command! FzfMiscChanges execute "lua require('fzf-lua').changes()"
-command! FzfMiscRegisters execute "lua require('fzf-lua').registers()"
-command! FzfMiscKeymaps execute "lua require('fzf-lua').keymaps()"
-command! FzfMiscSpellSuggest execute "lua require('fzf-lua').spell_suggest()"
-command! FzfMiscTags execute "lua require('fzf-lua').tags()"
-command! FzfMiscBtags execute "lua require('fzf-lua').btags()"
-command! FzfMiscFiletypes execute "lua require('fzf-lua').filetypes()"
-command! FzfMiscPackadd execute "lua require('fzf-lua').packadd()"
-
-]],
-	false
-)
+vim.api.nvim_create_user_command("FzfMiscResume", require('fzf-lua').resume, {})
+vim.api.nvim_create_user_command("FzfMiscBuiltin", require('fzf-lua').builtin, {})
+vim.api.nvim_create_user_command("FzfMiscHelpTags", require('fzf-lua').help_tags, {})
+vim.api.nvim_create_user_command("FzfMiscManPages", require('fzf-lua').man_pages, {})
+vim.api.nvim_create_user_command("FzfMiscColorschemes", require('fzf-lua').colorschemes, {})
+vim.api.nvim_create_user_command("FzfMiscCommands", require('fzf-lua').commands, {})
+vim.api.nvim_create_user_command("FzfMiscCommandHistory", require('fzf-lua').command_history, {})
+vim.api.nvim_create_user_command("FzfMiscSearchHistory", require('fzf-lua').search_history, {})
+vim.api.nvim_create_user_command("FzfMiscMarks", require('fzf-lua').marks, {})
+vim.api.nvim_create_user_command("FzfMiscJumps", require('fzf-lua').jumps, {})
+vim.api.nvim_create_user_command("FzfMiscChanges", require('fzf-lua').changes, {})
+vim.api.nvim_create_user_command("FzfMiscRegisters", require('fzf-lua').registers, {})
+vim.api.nvim_create_user_command("FzfMiscKeymaps", require('fzf-lua').keymaps, {})
+vim.api.nvim_create_user_command("FzfMiscSpellSuggest", require('fzf-lua').spell_suggest, {})
+vim.api.nvim_create_user_command("FzfMiscTags", require('fzf-lua').tags, {})
+vim.api.nvim_create_user_command("FzfMiscBtags", require('fzf-lua').btags, {})
+vim.api.nvim_create_user_command("FzfMiscFiletypes", require('fzf-lua').filetypes, {})
+vim.api.nvim_create_user_command("FzfMiscPackadd", require('fzf-lua').packadd, {})

@@ -154,16 +154,10 @@ function Show_line_diagnostics()
 	vim.diagnostic.open_float(nil, opts)
 end
 
-vim.api.nvim_exec(
-	[[
+vim.api.nvim_create_autocmd("InsertEnter", {
+	pattern = "*.rs",
+    callback = function()
+        require('lsp_extensions').inlay_hints{ prefix = " →  ", enabled = {"TypeHint", "ChainingHint", "ParameterHint"} }
+    end
+})
 
-" Format
-" command! Format execute 'lua vim.lsp.buf.formatting()'
-
-" inlay hints
-" nnoremap <Leader>T :lua require'lsp_extensions'.inlay_hints()
-autocmd InsertEnter *.rs :lua require('lsp_extensions').inlay_hints{ prefix = " » ", enabled = {"TypeHint", "ChainingHint", "ParameterHint"} }
-
-]],
-	false
-)

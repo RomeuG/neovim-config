@@ -80,6 +80,15 @@ Plug("t9md/vim-choosewin")
 -- indent lines
 Plug("lukas-reineke/indent-blankline.nvim")
 
+-- distraction free editing
+Plug("junegunn/goyo.vim")
+
+-- Rust
+Plug("rust-lang/rust.vim")
+
+-- EditorConfig
+Plug 'editorconfig/editorconfig-vim'
+
 vim.call("plug#end")
 
 require("initializer")
