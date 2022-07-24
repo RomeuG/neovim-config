@@ -23,7 +23,7 @@ vim.cmd[[colorscheme gruvbox-material]]
 -- highlight matching parenthesis with a more visible color
 vim.cmd([[highlight MatchParen cterm=bold cterm=underline ctermfg=blue]])
 -- highlight vimtex conceal with better colors
-vim.cmd([[highlight Conceal ctermfg=red]])
+vim.cmd([[highlight Conceal ctermfg=red guifg=red]])
 
 -- taken from
 -- https://github.com/angelofallars/dotfiles/blob/main/nvim/lua/plugins/config/gruvbox_material.lua
