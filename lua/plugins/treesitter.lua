@@ -6,7 +6,7 @@ TreeSitter.setup({
 	ensure_installed = { "rust", "c", "lua", "python", "css" },
 	highlight = {
 		enable = true,
-		additional_vim_regex_highlighting = false,
+		additional_vim_regex_highlighting = true,
 	},
 	incremental_selection = {
 		enable = true,

@@ -2,6 +2,16 @@
 -- autocommands
 --
 
+-- Highlight on yank
+vim.api.nvim_create_augroup('YankHighlight', { clear = true })
+
+vim.api.nvim_create_autocmd('TextYankPost', {
+  group = 'YankHighlight',
+  callback = function()
+    vim.highlight.on_yank({ higroup = 'TermCursor', timeout = '400' })
+  end
+})
+
 -- help in vertical split
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "help",

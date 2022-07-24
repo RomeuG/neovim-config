@@ -109,9 +109,9 @@ local on_attach = function(client, bufnr)
 	-- document highlight
 	if client.server_capabilities.documentHighlightProvider then
 		vim.cmd([[
-            hi! LspReferenceRead cterm=bold ctermbg=237
-            hi! LspReferenceText cterm=bold ctermbg=237
-            hi! LspReferenceWrite cterm=bold ctermbg=237
+              hi! LspReferenceRead cterm=bold ctermbg=237 guibg=gray29
+              hi! LspReferenceText cterm=bold ctermbg=237 guibg=gray29
+              hi! LspReferenceWrite cterm=bold ctermbg=237 guibg=gray29
         ]])
 
 		vim.api.nvim_create_augroup("lsp_document_highlight", {
@@ -180,24 +180,25 @@ LspConfig.pyright.setup(config({
 	flags = { debounce_text_changes = 500 },
 }))
 
--- Rust
--- Rust LSP
--- LspConfig.rust_analyzer.setup(config({
--- 	flags = { debounce_text_changes = 500 },
--- 	settings = {
--- 		["rust-analyzer"] = {
--- 			["checkOnSave"] = { ["enable"] = true, ["command"] = "clippy" },
--- 			["cargo"] = { ["autoreload"] = true },
--- 		},
--- 	},
--- 	on_attach = on_attach,
--- 	handlers = handlers,
--- }))
 -- Rust Tools
 require("rust-tools").setup({
 	server = config({
 		on_attach = on_attach,
 		handlers = handlers,
+		settings = {
+			["rust-analyzer"] = {
+				assist = {
+					importGranularity = "module",
+					importPrefix = "self",
+				},
+				cargo = {
+					loadOutDirsFromCheck = true,
+				},
+				procMacro = {
+					enable = true,
+				},
+			},
+		},
 	}),
 })
 

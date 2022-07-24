@@ -42,9 +42,6 @@ Plug("kyazdani42/nvim-tree.lua")
 -- treesitter
 Plug("nvim-treesitter/nvim-treesitter", { ["do"] = ":TSUpdate" })
 
--- hightlight yanked area
-Plug("machakann/vim-highlightedyank")
-
 -- autopairing
 Plug("cohama/lexima.vim")
 
