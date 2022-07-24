@@ -1,5 +1,29 @@
 local Cmp = require("cmp")
 
+local kind_icons = {
+	Class = " ",
+	Color = " ",
+	Constant = " ",
+	Constructor = " ",
+	Enum = "了 ",
+	EnumMember = " ",
+	Field = " ",
+	File = " ",
+	Folder = " ",
+	Function = " ",
+	Interface = "ﰮ ",
+	Keyword = " ",
+	Method = "ƒ ",
+	Module = " ",
+	Property = " ",
+	Snippet = "﬌ ",
+	Struct = " ",
+	Text = " ",
+	Unit = " ",
+	Value = " ",
+	Variable = " ",
+}
+
 local feedkey = function(key, mode)
 	mode = mode or "n"
 	vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
@@ -18,6 +42,18 @@ local has_words_before = function(char)
 end
 
 Cmp.setup({
+	-- definition of conditions of when it should be enabled/disable
+	enabled = function()
+		-- disable completion in comment
+		local context = require("cmp.config.context")
+		-- keep command mode completion enable when cursor is in a comment
+		if vim.api.nvim_get_mode().mode == "c" then
+			return true
+		else
+			return not context.in_treesitter_capture("comment") and not context.in_syntax_group("Comment")
+		end
+	end,
+	-- snippets
 	snippet = {
 		expand = function(args)
 			vim.fn["UltiSnips#Anon"](args.body)

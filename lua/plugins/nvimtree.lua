@@ -9,7 +9,7 @@ NvimTree.setup({
 	hijack_cursor = true,
 	update_cwd = true,
 	ignore_ft_on_setup = {},
-	update_to_buf_dir = {
+	hijack_directories = {
 		enable = false,
 		auto_open = false,
 	},

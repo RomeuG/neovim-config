@@ -20,8 +20,8 @@ endfunction
 autocmd TermClose term://*:rusty-man* q
 
 " keybindings
-nmap <S-l> :call RustDocs()<CR>
-map <C-b> :!clear; cargo check<CR>
+" nmap <S-l> :call RustDocs()<CR>
+" map <C-b> :!clear; cargo check<CR>
 
 " abbreviations
 abclear
