@@ -24,9 +24,6 @@ Plug("lewis6991/gitsigns.nvim")
 -- undo tree
 Plug("mbbill/undotree")
 
--- smooth scrolling
-Plug("karb94/neoscroll.nvim")
-
 -- speed motion
 Plug("phaazon/hop.nvim")
 
