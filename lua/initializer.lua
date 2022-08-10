@@ -9,7 +9,7 @@ require("plugins.general")
 
 require("plugins.treesitter")
 require("plugins.lualine")
-require("plugins.lexima")
+require("plugins.autopairs")
 require("plugins.highlightedyank")
 require("plugins.ultisnips")
 require("plugins.gitsigns")

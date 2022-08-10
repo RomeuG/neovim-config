@@ -43,7 +43,8 @@ Plug("nvim-treesitter/nvim-treesitter", { ["do"] = ":TSUpdate" })
 Plug("windwp/nvim-ts-autotag")
 
 -- autopairing
-Plug("cohama/lexima.vim")
+-- Plug("cohama/lexima.vim")
+Plug("windwp/nvim-autopairs")
 
 -- latex
 Plug("lervag/vimtex")
