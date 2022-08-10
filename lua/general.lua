@@ -1,9 +1,9 @@
-vim.g.mapleader = ','
+vim.g.mapleader = ","
 
 -- enable mouse
-vim.opt.mouse = 'a'
+vim.opt.mouse = "a"
 -- use system clipboard
-vim.opt.clipboard = 'unnamedplus'
+vim.opt.clipboard = "unnamedplus"
 -- tab
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
@@ -22,7 +22,7 @@ vim.opt.fillchars = "eob: "
 vim.opt.wrap = true
 vim.opt.breakindent = true
 -- text encoding
-vim.opt.encoding = 'utf-8'
+vim.opt.encoding = "utf-8"
 -- enable numbers
 vim.opt.number = false
 -- tab title = file name
@@ -50,7 +50,7 @@ vim.opt.undodir = "/tmp"
 -- open all folds by default
 vim.opt.foldlevel = 0
 -- visual feedback while substituting
-vim.opt.inccommand = 'nosplit'
+vim.opt.inccommand = "nosplit"
 -- always show tabline
 vim.opt.showtabline = 1
 -- use rg as grep
@@ -63,6 +63,8 @@ vim.opt.magic = true
 vim.opt.showmatch = true
 -- unix as standard file type
 vim.opt.ffs = [[unix,dos,mac]]
+-- colorcolumn
+vim.opt.colorcolumn = "120"
 
 vim.opt.termguicolors = true
 
@@ -83,14 +85,41 @@ vim.opt.re = 1
 vim.opt.autoread = true
 
 -- wildcards to ignore
-vim.opt.wildignore = vim.opt.wildignore +  {'*/target/*', '*/tmp/*', '*.swp', '*.pyc', '__pycache__'}
+vim.opt.wildignore = vim.opt.wildignore + { "*/target/*", "*/tmp/*", "*.swp", "*.pyc", "__pycache__" }
 
 -- lsp related useful options
 vim.opt.hidden = true
 vim.opt.backup = false
 vim.opt.writebackup = false
 vim.opt.cmdheight = 1
-vim.opt.updatetime = 300
+vim.opt.updatetime = 100
 vim.opt.shortmess = vim.opt.shortmess + { c = true }
-vim.opt.signcolumn = 'yes'
+vim.opt.signcolumn = "yes"
 
+vim.opt.completeopt = "menuone"
+
+-- disable some builtin stuff
+local disabled_built_ins = {
+	"netrw",
+	"netrwPlugin",
+	"netrwSettings",
+	"netrwFileHandlers",
+	"gzip",
+	"zip",
+	"zipPlugin",
+	"tar",
+	"tarPlugin",
+	"getscript",
+	"getscriptPlugin",
+	"vimball",
+	"vimballPlugin",
+	"2html_plugin",
+	"logipat",
+	"rrhelper",
+	"spellfile_plugin",
+	"matchit",
+}
+
+for _, plugin in pairs(disabled_built_ins) do
+	vim.g["loaded_" .. plugin] = 1
+end

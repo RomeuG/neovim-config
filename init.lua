@@ -25,7 +25,7 @@ Plug("lewis6991/gitsigns.nvim")
 Plug("mbbill/undotree")
 
 -- smooth scrolling
-Plug("psliwka/vim-smoothie")
+Plug("karb94/neoscroll.nvim")
 
 -- speed motion
 Plug("phaazon/hop.nvim")
@@ -41,6 +41,9 @@ Plug("kyazdani42/nvim-tree.lua")
 
 -- treesitter
 Plug("nvim-treesitter/nvim-treesitter", { ["do"] = ":TSUpdate" })
+
+-- treesitter tags auto-pair
+Plug("windwp/nvim-ts-autotag")
 
 -- autopairing
 Plug("cohama/lexima.vim")
@@ -87,18 +90,18 @@ Plug("junegunn/goyo.vim")
 Plug("rust-lang/rust.vim")
 
 -- EditorConfig
-Plug 'editorconfig/editorconfig-vim'
+Plug("editorconfig/editorconfig-vim")
 
 -- orgmode
-Plug 'nvim-orgmode/orgmode'
+Plug("nvim-orgmode/orgmode")
 
 -- vim surround
-Plug 'tpope/vim-surround'
+Plug("tpope/vim-surround")
 
 vim.call("plug#end")
 
 -- gotta go fast
-require('impatient').enable_profile()
+require("impatient").enable_profile()
 
 -- initialize rest
 require("initializer")
@@ -128,5 +131,3 @@ vim.api.nvim_exec(
 ]],
 	false
 )
-
-

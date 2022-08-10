@@ -180,6 +180,26 @@ LspConfig.pyright.setup(config({
 	flags = { debounce_text_changes = 500 },
 }))
 
+-- HTML/CSS/JS???
+LspConfig.html.setup(config({
+	on_attach = on_attach,
+	handlers = handlers,
+	flags = { debounce_text_changes = 500 },
+	settings = {
+		html = {
+			format = {
+				templating = true,
+				wrapLineLength = 120,
+				wrapAttributes = "auto",
+			},
+			hover = {
+				documentation = true,
+				references = true,
+			},
+		},
+	},
+}))
+
 -- Rust Tools
 require("rust-tools").setup({
 	server = config({
@@ -187,6 +207,8 @@ require("rust-tools").setup({
 		handlers = handlers,
 		settings = {
 			["rust-analyzer"] = {
+				lens = { enable = true },
+				checkOnSave = { command = "clippy" },
 				assist = {
 					importGranularity = "module",
 					importPrefix = "self",

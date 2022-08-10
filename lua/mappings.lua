@@ -44,3 +44,7 @@ vim.api.nvim_set_keymap("i", "<C-Down>", "<esc><S-}>i", {})
 
 -- backspace behaviour in normal mode
 vim.api.nvim_set_keymap("n", "<BS>", "i<BS><esc>`^", {})
+
+-- deactivate these mappings
+vim.api.nvim_set_keymap("", "<S-Up>", "", {})
+vim.api.nvim_set_keymap("", "<S-Down>", "", {})
