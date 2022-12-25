@@ -3,13 +3,13 @@
 --
 
 -- Highlight on yank
-vim.api.nvim_create_augroup('YankHighlight', { clear = true })
+vim.api.nvim_create_augroup("YankHighlight", { clear = true })
 
-vim.api.nvim_create_autocmd('TextYankPost', {
-  group = 'YankHighlight',
-  callback = function()
-    vim.highlight.on_yank({ higroup = 'TermCursor', timeout = '400' })
-  end
+vim.api.nvim_create_autocmd("TextYankPost", {
+	group = "YankHighlight",
+	callback = function()
+		vim.highlight.on_yank({ higroup = "TermCursor", timeout = "400" })
+	end,
 })
 
 -- help in vertical split
@@ -68,14 +68,21 @@ vim.api.nvim_create_autocmd("FileType", {
 --
 
 vim.api.nvim_create_user_command("Scratch", function()
-    vim.cmd("call CreateScratchBuffer(1)")
+	vim.cmd("call CreateScratchBuffer(1)")
 end, {})
 
 vim.api.nvim_create_user_command("Scratchh", function()
-    vim.cmd("call CreateScratchBuffer(0)")
+	vim.cmd("call CreateScratchBuffer(0)")
 end, {})
 
 vim.api.nvim_create_user_command("TimeStamp", function()
 	vim.cmd("call InsertDateStamp()")
 end, {})
 
+-- selected text encryption/decryption
+vim.api.nvim_create_user_command("GpgEncrypt", "'<,'>!gpg --encrypt -r \"Romeu Gomes\" | xxd -p", { range = true })
+vim.api.nvim_create_user_command(
+	"GpgDecrypt",
+	"'<,'>!xxd -r -p | gpg --quiet --decrypt -r \"Romeu Gomes\" -",
+	{ range = true }
+)

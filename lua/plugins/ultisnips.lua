@@ -1,7 +1,11 @@
 require("cmp_nvim_ultisnips").setup({})
 vim.g.UltiSnipsEnableSnipMate = 0
 vim.g.UltiSnipsRemoveSelectModeMappings = 0
-vim.g.UltiSnipsExpandTrigger = "<Tab>"
+
+-- the following UltiSnipsExpandTrigger is EXTREMELY SLOW!!!
+-- just put some keybind you will never ever use
+-- also, never seemed to need this anyways
+vim.g.UltiSnipsExpandTrigger = "<C-S-j>"
 vim.g.UltiSnipsJumpForwardTrigger = "<Tab>"
 vim.g.UltiSnipsJumpBackwardTrigger = "<S-Tab>"
 

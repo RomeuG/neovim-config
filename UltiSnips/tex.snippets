@@ -93,6 +93,12 @@ snippet pac "Package" b
 \usepackage[${1:options}]{${2:package}}$0
 endsnippet
 
+snippet lstlisting "Listing"
+\begin{lstlisting}[language=$1, caption={$0}, xleftmargin=.15\textwidth, xrightmargin=.15\textwidth]
+$2
+\end{lstlisting}
+endsnippet
+
 snippet => "implies" Ai
 \implies
 endsnippet

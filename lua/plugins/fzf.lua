@@ -2,15 +2,63 @@
 local Fzf = require("fzf-lua")
 local FzfActions = require("fzf-lua.actions")
 
+-- TODO(romeu): these might be useless
 vim.env.FZF_DEFAULT_OPTS = "--layout=reverse --inline-info"
 vim.env.FZF_DEFAULT_COMMAND =
-	"rg --files --hidden --glob '!.git/**' --glob '!build/**' --glob '!.dart_tool/**' --glob '!.idea' --glob '!node_modules'"
+	"rg --files --hidden --glob '!.git/**' --glob '!.github/**' --glob '!build/**' --glob '!.dart_tool/**' --glob '!.idea' --glob '!node_modules' --glob '!resources' --glob '!lib/**' --glob '!.cache/**'"
 
 Fzf.setup({
+	fzf_opts = {
+		["--inline-info"] = "",
+		["--prompt"] = "❯ ",
+		["--pointer"] = "❯ ",
+		["--marker"] = "❯ ",
+		["--ansi"] = "",
+		["--height"] = "100%",
+		["--layout"] = "reverse",
+		["--border"] = "none",
+	},
+	file_ignore_patterns = {
+		"tests/*",
+		".dart_tool/*",
+		".idea/*",
+		".git",
+		"lib/*",
+		".cache/*",
+		"resources/*",
+		".github/*",
+		"build/*",
+	},
+	files = {
+		prompt = "Files❯ ",
+	},
+	winopts = {
+		border = { "┌", "─", "┐", "│", "┘", "─", "└", "│" },
+		hl = {
+			border = "FloatBorder",
+		},
+		preview = {
+			title = false,
+			winopts = {
+				number = false,
+				relativenumber = false,
+				cursorline = false,
+				cursorlineopt = "both",
+				cursorcolumn = false,
+				signcolumn = "no",
+				list = false,
+				foldenable = false,
+				foldmethod = "manual",
+			},
+		},
+	},
 	previewers = {
 		man = {
 			cmd = "man %s | col -bx",
 		},
+	},
+	grep = {
+		rg_opts = "--trim --column --line-number --no-heading --color=always --smart-case --hidden",
 	},
 	actions = {
 		files = {
@@ -43,8 +91,8 @@ Fzf.setup({
 		fzf = {
 			["ctrl-z"] = "abort",
 			["ctrl-u"] = "unix-line-discard",
-			["ctrl-f"] = "half-page-down",
-			["ctrl-b"] = "half-page-up",
+			["shift-down"] = "half-page-down",
+			["shift-up"] = "half-page-up",
 			["ctrl-a"] = "beginning-of-line",
 			["ctrl-e"] = "end-of-line",
 			["alt-a"] = "toggle-all",
@@ -73,6 +121,7 @@ vim.api.nvim_set_keymap("n", "<leader>zc", "<cmd>lua require('fzf-lua').commands
 vim.api.nvim_set_keymap("n", "<leader>zm", "<cmd>lua require('fzf-lua').man_pages()<CR>", {})
 -- execute rg with fzf
 vim.api.nvim_set_keymap("n", "<leader>/", "<cmd>lua require('fzf-lua').grep_project()<CR>", {})
+-- vim.api.nvim_set_keymap("n", "<leader>/", "<cmd>lua require('fzf-lua').grep_project({ cwd = \"/home/romeu/Downloads\" })<CR>", {})
 
 -- show commits
 vim.api.nvim_set_keymap("n", "<leader>gc", "<cmd>lua require('fzf-lua').git_commits()<CR>", {})

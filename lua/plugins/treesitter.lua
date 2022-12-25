@@ -3,10 +3,24 @@ local TreeSitter = require("nvim-treesitter.configs")
 
 -- treesitter
 TreeSitter.setup({
-	ensure_installed = { "rust", "c", "lua", "python", "css", "html" },
+	ensure_installed = {
+		"rust",
+		"c",
+		"cpp",
+		"lua",
+		"python",
+		"dart",
+		"css",
+		"html",
+		"javascript",
+		"typescript",
+		"tsx",
+		"java",
+		"kotlin",
+		"zig",
+	},
 	autotag = {
 		enable = true,
-        filetypes = { "html" },
 	},
 	highlight = {
 		enable = true,

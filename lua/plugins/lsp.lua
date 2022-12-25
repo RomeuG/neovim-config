@@ -1,4 +1,5 @@
 local LspConfig = require("lspconfig")
+-- local Telescope = require("telescope.builtin")
 
 local border = {
 	{ "╭", "FloatBorder" },
@@ -60,7 +61,7 @@ local function config(_config)
 	_capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 	return vim.tbl_deep_extend("force", {
-		capabilities = require("cmp_nvim_lsp").update_capabilities(_capabilities),
+		capabilities = require("cmp_nvim_lsp").default_capabilities(_capabilities),
 	}, _config or {})
 end
 
@@ -78,6 +79,25 @@ local on_attach = function(client, bufnr)
 	local opts = { noremap = true, silent = true }
 
 	-- general mappings
+	-- jump to definition
+	-- vim.keymap.set("n", "<leader>cd", Telescope.lsp_definitions, opts)
+	-- -- jump to implementation
+	-- vim.keymap.set("n", "<leader>ci", Telescope.lsp_implementations, opts)
+	-- -- jump to type definition
+	-- vim.keymap.set("n", "<leader>cy", Telescope.lsp_type_definitions, opts)
+	-- -- jump to references
+	-- vim.keymap.set("n", "<leader>cr", Telescope.lsp_references, opts)
+	-- -- rename
+	-- vim.api.nvim_set_keymap("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
+	-- -- documentation
+	-- vim.api.nvim_set_keymap("n", "K", ":call Show_documentation()<CR>", opts)
+	-- -- code action
+	-- vim.api.nvim_set_keymap("n", "<leader>a", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
+
+	-- -- line diagnostics
+	-- vim.api.nvim_set_keymap("n", "gd", "<cmd>lua Show_line_diagnostics()<CR>", opts)
+
+	-- general mappings fusing FZF
 	-- jump to definition
 	vim.api.nvim_set_keymap("n", "<leader>cd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
 	-- jump to implementation
@@ -114,25 +134,19 @@ local on_attach = function(client, bufnr)
               hi! LspReferenceWrite cterm=bold ctermbg=237 guibg=gray29
         ]])
 
-		vim.api.nvim_create_augroup("lsp_document_highlight", {
-			clear = false,
-		})
-
-		vim.api.nvim_clear_autocmds({
-			buffer = bufnr,
-			group = "lsp_document_highlight",
-		})
-
-		vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
-			group = "lsp_document_highlight",
-			buffer = bufnr,
+		vim.api.nvim_create_augroup("lsp_document_highlight", { clear = true })
+		vim.api.nvim_clear_autocmds({ buffer = bufnr, group = "lsp_document_highlight" })
+		vim.api.nvim_create_autocmd("CursorHold", {
 			callback = vim.lsp.buf.document_highlight,
-		})
-
-		vim.api.nvim_create_autocmd("CursorMoved", {
-			group = "lsp_document_highlight",
 			buffer = bufnr,
+			group = "lsp_document_highlight",
+			desc = "Document Highlight",
+		})
+		vim.api.nvim_create_autocmd("CursorMoved", {
 			callback = vim.lsp.buf.clear_references,
+			buffer = bufnr,
+			group = "lsp_document_highlight",
+			desc = "Clear All the References",
 		})
 	end
 end
@@ -171,6 +185,18 @@ LspConfig.clangd.setup(config({
 	on_attach = on_attach,
 	handlers = handlers,
 	flags = { debounce_text_changes = 500 },
+	cmd = {
+		-- see clangd --help-hidden
+		"clangd",
+		"--background-index",
+		-- by default, clang-tidy use -checks=clang-diagnostic-*,clang-analyzer-*
+		-- to add more checks, create .clang-tidy file in the root directory
+		-- and add Checks key, see https://clang.llvm.org/extra/clang-tidy/
+		"--clang-tidy",
+		"--completion-style=bundled",
+		"--cross-file-rename",
+		"--header-insertion=never",
+	},
 }))
 
 -- Python
@@ -200,6 +226,12 @@ LspConfig.html.setup(config({
 	},
 }))
 
+LspConfig.tsserver.setup(config({
+	on_attach = on_attach,
+	handlers = handlers,
+	flags = { debounce_text_changes = 1000, allow_incremental_sync = true },
+}))
+
 -- Rust Tools
 require("rust-tools").setup({
 	server = config({
@@ -224,12 +256,96 @@ require("rust-tools").setup({
 	}),
 })
 
+-- Zig
+LspConfig.zls.setup(config({
+	on_attach = on_attach,
+	handlers = handlers,
+	flags = { debounce_text_changes = 500 },
+}))
+
+-- Kotlin
+-- LspConfig.kotlin_language_server.setup(config({
+-- 	on_attach = on_attach,
+-- 	handlers = handlers,
+-- 	flags = { debounce_text_changes = 500 },
+-- }))
+
 -- LaTeX
 LspConfig.texlab.setup(config({
 	on_attach = on_attach,
 	handlers = handlers,
 	flags = { debounce_text_changes = 500 },
+	settings = {
+		build = {
+			-- this doesnt seem to work
+			executable = "lualatex",
+			args = { "-shell-escape", "-interaction=nonstopmode", "-synctex=1", "%f" },
+		},
+		chktex = {
+			onOpenAndSave = false,
+			onEdit = false,
+		},
+	},
 }))
+
+-- Flutter Tools
+require("flutter-tools").setup({
+	ui = {
+		border = "rounded",
+		notification_style = "native",
+	},
+	decorations = {
+		statusline = {
+			app_version = true,
+			device = true,
+		},
+	},
+	-- flutter_path = "<full/path/if/needed>", -- <-- this takes priority over the lookup
+	flutter_lookup_cmd = nil, -- example "dirname $(which flutter)" or "asdf where flutter"
+	fvm = false, -- takes priority over path, uses <workspace>/.fvm/flutter_sdk if enabled
+	widget_guides = {
+		enabled = false,
+	},
+	closing_tags = {
+		highlight = "SpecialComment", -- highlight for the closing tag
+		prefix = ">", -- character to use for close tag e.g. > Widget
+		enabled = true, -- set to false to disable
+	},
+	dev_log = {
+		enabled = true,
+		open_cmd = "tabedit", -- command to use to open the log buffer
+	},
+	dev_tools = {
+		autostart = false, -- autostart devtools server if not detected
+		auto_open_browser = false, -- Automatically opens devtools in the browser
+	},
+	outline = {
+		open_cmd = "30vnew", -- command to use to open the outline buffer
+		auto_open = false, -- if true this will open the outline automatically when it is first populated
+	},
+	lsp = {
+		color = { -- show the derived colours for dart variables
+			enabled = false, -- whether or not to highlight color variables at all, only supported on flutter >= 2.10
+			background = false, -- highlight the background
+			foreground = false, -- highlight the foreground
+			virtual_text = true, -- show the highlight using virtual text
+			virtual_text_str = "■", -- the virtual text character to highlight
+		},
+		on_attach = on_attach,
+		capabilities = function(config)
+			local _capabilities = vim.lsp.protocol.make_client_capabilities()
+			_capabilities.textDocument.completion.completionItem.snippetSupport = true
+			return _capabilities
+		end,
+		handlers = handlers,
+		settings = {
+			showTodos = true,
+			completeFunctionCalls = true,
+			renameFilesWithClasses = "prompt",
+			enableSnippets = true,
+		},
+	},
+})
 
 function Show_line_diagnostics()
 	local opts = {

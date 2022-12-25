@@ -9,6 +9,13 @@ Plug("lewis6991/impatient.nvim")
 Plug("rktjmp/lush.nvim")
 Plug("sainnhe/gruvbox-material")
 
+-- utils
+Plug("nvim-lua/plenary.nvim")
+Plug("nvim-telescope/telescope.nvim")
+Plug("nvim-telescope/telescope-fzf-native.nvim", { ["do"] = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build" })
+Plug("fhill2/telescope-ultisnips.nvim")
+Plug("rmagatti/session-lens")
+
 -- vim lualine
 Plug("nvim-lualine/lualine.nvim")
 
@@ -20,6 +27,9 @@ Plug("tpope/vim-fugitive")
 
 -- git nice stuff
 Plug("lewis6991/gitsigns.nvim")
+
+-- github support
+Plug("pwntester/octo.nvim")
 
 -- undo tree
 Plug("mbbill/undotree")
@@ -43,7 +53,6 @@ Plug("nvim-treesitter/nvim-treesitter", { ["do"] = ":TSUpdate" })
 Plug("windwp/nvim-ts-autotag")
 
 -- autopairing
--- Plug("cohama/lexima.vim")
 Plug("windwp/nvim-autopairs")
 
 -- latex
@@ -61,6 +70,9 @@ Plug("hrsh7th/cmp-nvim-lsp")
 Plug("hrsh7th/cmp-path")
 Plug("hrsh7th/nvim-cmp")
 
+-- dart lsp
+Plug("akinsho/flutter-tools.nvim")
+
 -- rust tools
 Plug("simrat39/rust-tools.nvim")
 
@@ -71,9 +83,11 @@ Plug("sbdchd/neoformat")
 Plug("SirVer/ultisnips")
 Plug("quangnguyen30192/cmp-nvim-ultisnips")
 
+-- which-key
+Plug("folke/which-key.nvim")
+
 -- session manager
-Plug("nvim-lua/plenary.nvim")
-Plug("Shatur/neovim-session-manager")
+Plug("rmagatti/auto-session")
 
 -- choosewin
 Plug("t9md/vim-choosewin")
@@ -95,6 +109,15 @@ Plug("nvim-orgmode/orgmode")
 
 -- vim surround
 Plug("tpope/vim-surround")
+
+-- guess indentation
+Plug("NMAC427/guess-indent.nvim")
+
+-- todo comments
+Plug("folke/todo-comments.nvim")
+
+-- fold
+Plug("anuvyklack/pretty-fold.nvim")
 
 vim.call("plug#end")
 
@@ -125,7 +148,8 @@ vim.api.nvim_exec(
     let g:neovide_cursor_vfx_particle_density=7.0
     let g:neovide_cursor_vfx_particle_speed=10.0
     let g:neovide_cursor_vfx_particle_phase=1.5
-    let g:neovide_cursor_vfx_particle_curl=1.0
+	let g:neovide_cursor_vfx_particle_curl=1.0
 ]],
 	false
 )
+

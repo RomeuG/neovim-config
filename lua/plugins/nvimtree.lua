@@ -13,6 +13,10 @@ NvimTree.setup({
 		enable = false,
 		auto_open = false,
 	},
+	view = {
+		side = "right",
+		hide_root_folder = true,
+	},
 	diagnostics = {
 		enable = false,
 		icons = {

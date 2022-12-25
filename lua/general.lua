@@ -1,5 +1,8 @@
 vim.g.mapleader = ","
 
+-- remove cmdline
+-- vim.opt.cmdheight = 0
+
 -- enable mouse
 vim.opt.mouse = "a"
 -- use system clipboard
@@ -11,7 +14,7 @@ vim.opt.shiftwidth = 4
 -- tab key actions
 vim.opt.expandtab = true
 vim.opt.smarttab = true
--- highlight text during search
+-- highlight text during search druing search
 vim.opt.incsearch = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
@@ -19,8 +22,8 @@ vim.opt.hlsearch = true
 -- TODO
 vim.opt.fillchars = "eob: "
 -- wrap long lines set by tw
-vim.opt.wrap = true
-vim.opt.breakindent = true
+vim.opt.wrap = false
+vim.opt.breakindent = false
 -- text encoding
 vim.opt.encoding = "utf-8"
 -- enable numbers
@@ -31,12 +34,12 @@ vim.opt.title = true
 vim.opt.showcmd = false
 -- for indentation plugin
 vim.opt.conceallevel = 2
+-- conceal cursor
+vim.opt.concealcursor = "nc"
 -- split to the right
 vim.opt.splitright = true
 -- split below
 vim.opt.splitbelow = true
--- auto wrap lines after 90 chars
-vim.opt.tw = 90
 -- enable emojis
 vim.opt.emoji = true
 -- set history limit to 1000 line
@@ -47,8 +50,6 @@ vim.opt.backspace = [[indent,eol,start]]
 vim.opt.undofile = true
 -- undo temporary directory
 vim.opt.undodir = "/tmp"
--- open all folds by default
-vim.opt.foldlevel = 0
 -- visual feedback while substituting
 vim.opt.inccommand = "nosplit"
 -- always show tabline
@@ -65,6 +66,8 @@ vim.opt.showmatch = true
 vim.opt.ffs = [[unix,dos,mac]]
 -- colorcolumn
 vim.opt.colorcolumn = "120"
+-- time for mapped sequence
+vim.opt.timeoutlen = 500
 
 vim.opt.termguicolors = true
 
@@ -79,7 +82,8 @@ vim.opt.scrolljump = 5
 vim.opt.lazyredraw = true
 vim.opt.redrawtime = 10000
 vim.opt.synmaxcol = 180
-vim.opt.re = 1
+-- should be 2 for better performance
+vim.opt.re = 2
 
 -- read when file is changed from outside
 vim.opt.autoread = true
@@ -91,12 +95,21 @@ vim.opt.wildignore = vim.opt.wildignore + { "*/target/*", "*/tmp/*", "*.swp", "*
 vim.opt.hidden = true
 vim.opt.backup = false
 vim.opt.writebackup = false
-vim.opt.cmdheight = 1
 vim.opt.updatetime = 100
 vim.opt.shortmess = vim.opt.shortmess + { c = true }
 vim.opt.signcolumn = "yes"
 
 vim.opt.completeopt = "menuone"
+
+-- edit 1 char after end of line
+vim.opt.virtualedit = "onemore"
+
+-- fold settings - requires treesitter!
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+vim.opt.foldlevelstart = 99
+vim.opt.foldnestmax = 10
+vim.foldenable = false
 
 -- disable some builtin stuff
 local disabled_built_ins = {

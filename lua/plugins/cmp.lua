@@ -24,6 +24,15 @@ local kind_icons = {
 	Variable = " ",
 }
 
+local t = function(str)
+	return vim.api.nvim_replace_termcodes(str, true, true, true)
+end
+
+local check_back_space = function()
+	local col = vim.fn.col(".") - 1
+	return col == 0 or vim.fn.getline("."):sub(col, col):match("%s") ~= nil
+end
+
 local feedkey = function(key, mode)
 	mode = mode or "n"
 	vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
@@ -67,20 +76,32 @@ Cmp.setup({
 		["<S-Tab>"] = Cmp.mapping(Cmp.mapping.select_prev_item(), { "i", "s" }),
 		["<C-Space>"] = Cmp.mapping(Cmp.mapping.complete(), { "i", "c" }),
 		["<CR>"] = Cmp.mapping.confirm({ select = false }),
+		-- ["<Tab>"] = Cmp.mapping(function(fallback)
+		-- 	if vim.fn.complete_info()["selected"] == -1 and vim.fn["UltiSnips#CanExpandSnippet"]() == 1 then
+		-- 		feedkey("<C-R>=UltiSnips#ExpandSnippet()<CR>")
+		-- 	elseif vim.fn["UltiSnips#CanJumpForwards"]() == 1 then
+		-- 		feedkey("<ESC>:call UltiSnips#JumpForwards()<CR>")
+		-- 	elseif has_words_before() then
+		-- 		Cmp.confirm({ select = false })
+		-- 	else
+		-- 		fallback()
+		-- 	end
+		-- end, {
+		-- 	"i",
+		-- 	"s",
+		-- }),
 		["<Tab>"] = Cmp.mapping(function(fallback)
-			if vim.fn.complete_info()["selected"] == -1 and vim.fn["UltiSnips#CanExpandSnippet"]() == 1 then
-				feedkey("<C-R>=UltiSnips#ExpandSnippet()<CR>")
-			elseif vim.fn["UltiSnips#CanJumpForwards"]() == 1 then
-				feedkey("<ESC>:call UltiSnips#JumpForwards()<CR>")
-			elseif has_words_before() then
-				Cmp.confirm({ select = false })
+			if vim.fn.pumvisible() == 1 then
+				if vim.fn["UltiSnips#CanExpandSnippet"]() == 1 or vim.fn["UltiSnips#CanJumpForwards"]() == 1 then
+					return vim.fn.feedkeys(t("<C-R>=UltiSnips#ExpandSnippetOrJump()<CR>"))
+				end
+				vim.fn.feedkeys(t("<C-n>"), "n")
+			elseif check_back_space() then
+				vim.fn.feedkeys(t("<tab>"), "n")
 			else
 				fallback()
 			end
-		end, {
-			"i",
-			"s",
-		}),
+		end, { "i", "s" }),
 		["<C-e>"] = Cmp.mapping(function(fallback)
 			if
 				vim.fn.complete_info()["selected"] == -1

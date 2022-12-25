@@ -7,6 +7,8 @@ vim.api.nvim_set_keymap("n", "<leader>q", ":bd<CR>", {})
 -- save
 vim.api.nvim_set_keymap("n", "<leader>w", ":w<CR>", {})
 
+vim.api.nvim_set_keymap("n", "<leader>p", "\"_dP", {})
+
 -- buffer change
 vim.api.nvim_set_keymap("n", "<Tab>", ":bnext<CR>", {})
 vim.api.nvim_set_keymap("n", "<S-Tab>", ":bprevious<CR>", {})

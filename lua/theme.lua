@@ -1,6 +1,8 @@
 -- theme
 vim.opt.background = "dark"
 
+-- gruvbox-material specific settings
+
 vim.g.gruvbox_material_background = "hard"
 
 vim.g.gruvbox_material_palette = "original"
@@ -21,7 +23,8 @@ vim.cmd([[syntax on]])
 vim.cmd[[colorscheme gruvbox-material]]
 
 -- highlight matching parenthesis with a more visible color
-vim.cmd([[highlight MatchParen cterm=bold cterm=underline ctermfg=blue]])
+vim.cmd([[highlight MatchParen cterm=bold cterm=underline ctermfg=red guibg=blue guifg=limegreen]])
+vim.cmd([[hi Delimiter guifg=#ff0000]])
 -- highlight vimtex conceal with better colors
 vim.cmd([[highlight Conceal ctermfg=red guifg=red]])
 
