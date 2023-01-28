@@ -75,6 +75,7 @@ Plug("akinsho/flutter-tools.nvim")
 
 -- rust tools
 Plug("simrat39/rust-tools.nvim")
+-- Plug("kdarkhan/rust-tools.nvim")
 
 -- formatter
 Plug("sbdchd/neoformat")

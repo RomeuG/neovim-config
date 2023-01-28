@@ -95,7 +95,7 @@ vim.opt.wildignore = vim.opt.wildignore + { "*/target/*", "*/tmp/*", "*.swp", "*
 vim.opt.hidden = true
 vim.opt.backup = false
 vim.opt.writebackup = false
-vim.opt.updatetime = 100
+vim.opt.updatetime = 200
 vim.opt.shortmess = vim.opt.shortmess + { c = true }
 vim.opt.signcolumn = "yes"
 

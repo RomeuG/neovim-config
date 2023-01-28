@@ -46,7 +46,10 @@ end
 local handlers = {
 	["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = border }),
 	["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = border }),
-	["textDocument/definition"] = fzf_goto_definition(),
+	-- ["textDocument/definition"] = require('fzf-lua').lsp_definitions,
+	["textDocument/definition"] = function()
+		require('fzf-lua').lsp_definitions()
+	end,
 	["textDocument/references"] = fzf_goto_references(),
 }
 
