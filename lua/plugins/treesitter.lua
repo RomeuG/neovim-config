@@ -18,6 +18,7 @@ TreeSitter.setup({
 		"java",
 		"kotlin",
 		"zig",
+		"bash",
 	},
 	autotag = {
 		enable = true,
