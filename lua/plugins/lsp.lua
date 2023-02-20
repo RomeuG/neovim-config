@@ -163,7 +163,7 @@ vim.diagnostic.config({
 })
 
 -- Lua
-LspConfig.sumneko_lua.setup(config({
+LspConfig.lua_ls.setup(config({
 	on_attach = on_attach,
 	handlers = handlers,
 	flags = { debounce_text_changes = 500 },

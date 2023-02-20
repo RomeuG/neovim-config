@@ -19,7 +19,7 @@ local colors = {
 
 LuaLine.setup({
 	options = {
-		theme = "gruvbox",
+		theme = "catppuccin",
 		always_divide_middle = true,
 		icons_enabled = false,
 		disabled_filetypes = { "NvimTree" },

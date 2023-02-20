@@ -24,7 +24,6 @@ require("plugins.formatter")
 require("plugins.whichkey")
 
 require("plugins.multiplecursors")
--- require("plugins.telescope")
 require("plugins.fzf")
 require("plugins.nvimtree")
 require("plugins.hop")

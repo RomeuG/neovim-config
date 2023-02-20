@@ -24,6 +24,9 @@ vim.opt.fillchars = "eob: "
 -- wrap long lines set by tw
 vim.opt.wrap = false
 vim.opt.breakindent = false
+-- autoindent
+vim.opt.autoindent = true
+vim.opt.smartindent = true
 -- text encoding
 vim.opt.encoding = "utf-8"
 -- enable numbers

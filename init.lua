@@ -6,15 +6,13 @@ vim.call("plug#begin", "~/.config/nvim/plugged")
 Plug("lewis6991/impatient.nvim")
 
 -- theme
-Plug("rktjmp/lush.nvim")
+-- Plug("rktjmp/lush.nvim")
 Plug("sainnhe/gruvbox-material")
+Plug("catppuccin/nvim")
 
 -- utils
 Plug("nvim-lua/plenary.nvim")
 Plug("nvim-telescope/telescope.nvim")
-Plug("nvim-telescope/telescope-fzf-native.nvim", { ["do"] = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build" })
-Plug("fhill2/telescope-ultisnips.nvim")
-Plug("rmagatti/session-lens")
 
 -- vim lualine
 Plug("nvim-lualine/lualine.nvim")
