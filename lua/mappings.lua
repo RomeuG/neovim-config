@@ -50,3 +50,8 @@ vim.api.nvim_set_keymap("n", "<BS>", "i<BS><esc>`^", {})
 -- deactivate these mappings
 vim.api.nvim_set_keymap("", "<S-Up>", "", {})
 vim.api.nvim_set_keymap("", "<S-Down>", "", {})
+
+-- diffget
+vim.api.nvim_set_keymap("n", "<leader>d1", ":diffget LOCAL<CR>", {})
+vim.api.nvim_set_keymap("n", "<leader>d2", ":diffget BASE<CR>", {})
+vim.api.nvim_set_keymap("n", "<leader>d3", ":diffget REMOTE<CR>", {})
