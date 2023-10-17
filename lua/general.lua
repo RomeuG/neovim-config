@@ -9,10 +9,10 @@ vim.opt.mouse = "a"
 vim.opt.clipboard = "unnamedplus"
 -- tab
 vim.opt.tabstop = 4
-vim.opt.softtabstop = 4
+-- vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 -- tab key actions
-vim.opt.expandtab = true
+vim.opt.expandtab = false
 vim.opt.smarttab = true
 -- highlight text during search druing search
 vim.opt.incsearch = true
@@ -68,7 +68,7 @@ vim.opt.showmatch = true
 -- unix as standard file type
 vim.opt.ffs = [[unix,dos,mac]]
 -- colorcolumn
-vim.opt.colorcolumn = "120"
+vim.opt.colorcolumn = "80"
 -- time for mapped sequence
 vim.opt.timeoutlen = 500
 

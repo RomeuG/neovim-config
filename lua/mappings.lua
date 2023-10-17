@@ -45,7 +45,7 @@ vim.api.nvim_set_keymap("i", "<C-Up>", "<esc><S-{>i", {})
 vim.api.nvim_set_keymap("i", "<C-Down>", "<esc><S-}>i", {})
 
 -- backspace behaviour in normal mode
-vim.api.nvim_set_keymap("n", "<BS>", "i<BS><esc>`^", {})
+-- vim.api.nvim_set_keymap("n", "<BS>", "i<BS><esc>`^", {})
 
 -- deactivate these mappings
 vim.api.nvim_set_keymap("", "<S-Up>", "", {})
@@ -55,3 +55,23 @@ vim.api.nvim_set_keymap("", "<S-Down>", "", {})
 vim.api.nvim_set_keymap("n", "<leader>d1", ":diffget LOCAL<CR>", {})
 vim.api.nvim_set_keymap("n", "<leader>d2", ":diffget BASE<CR>", {})
 vim.api.nvim_set_keymap("n", "<leader>d3", ":diffget REMOTE<CR>", {})
+
+-- inlay hints
+vim.api.nvim_set_keymap("n", "<F10>", ":lua vim.lsp.buf.inlay_hint(0)<CR>", {});
+
+-- other useful stuff
+local opts = { noremap = true, silent = true }
+
+vim.keymap.set("n", "<C-u>", "<C-u>zz", opts)
+vim.keymap.set("n", "<C-d>", "<C-d>zz", opts)
+vim.keymap.set("n", "{", "{zz", opts)
+vim.keymap.set("n", "}", "}zz", opts)
+vim.keymap.set("n", "N", "Nzz", opts)
+vim.keymap.set("n", "n", "nzz", opts)
+vim.keymap.set("n", "G", "Gzz", opts)
+vim.keymap.set("n", "gg", "ggzz", opts)
+vim.keymap.set("n", "%", "%zz", opts)
+vim.keymap.set("n", "*", "*zz", opts)
+vim.keymap.set("n", "#", "#zz", opts)
+vim.keymap.set("n", "<C-i>", "<C-i>zz", opts)
+vim.keymap.set("n", "<C-o>", "<C-o>zz", opts)

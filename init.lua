@@ -109,7 +109,8 @@ Plug("editorconfig/editorconfig-vim")
 Plug("nvim-orgmode/orgmode")
 
 -- vim surround
-Plug("tpope/vim-surround")
+-- Plug("tpope/vim-surround")
+Plug("kylechui/nvim-surround")
 
 -- guess indentation
 Plug("NMAC427/guess-indent.nvim")
@@ -128,28 +129,39 @@ require("impatient").enable_profile()
 -- initialize rest
 require("initializer")
 
-vim.api.nvim_exec(
-	[[
-    set guifont=Sarasa\ Mono\ SC\ Nerd:h14
+if vim.g.neovide then
+	vim.o.guifont = "Iosevka_NF_SemiBold:h8"
+	vim.o.linespace = 0
+	vim.g.neovide_scale_factor = 2.0
 
-    let g:neovide_refresh_rate=60
-    let g:neovide_transparency=1.0
+	vim.g.neovide_padding_top = 2
+	vim.g.neovide_padding_bottom = 2
+	vim.g.neovide_padding_right = 2
+	vim.g.neovide_padding_left = 2
 
-    let g:neovide_no_idle=v:false
-    let g:neovide_fullscreen=v:false
+	vim.g.neovide_floating_blur = true
+	vim.g.neovide_floating_opacity = 0.1
+	vim.g.neovide_floating_blur_amount_x = 4.0
+	vim.g.neovide_floating_blur_amount_y = 4.0
 
-    let g:neovide_cursor_animation_length=0.10
-    let g:neovide_cursor_trail_length=0.5
+	vim.g.neovide_transparency = 1.0
+	vim.g.neovide_scroll_animation_length = 0.2
 
-    let g:neovide_cursor_antialiasing=v:true
+	vim.g.neovide_hide_mouse_when_typing = true
+	vim.g.neovide_underline_automatic_scaling = false
 
-    let g:neovide_cursor_vfx_mode = "ripple"
-    let g:neovide_cursor_vfx_opacity=200.0
-    let g:neovide_cursor_vfx_particle_lifetime=1.2
-    let g:neovide_cursor_vfx_particle_density=7.0
-    let g:neovide_cursor_vfx_particle_speed=10.0
-    let g:neovide_cursor_vfx_particle_phase=1.5
-	let g:neovide_cursor_vfx_particle_curl=1.0
-]],
-	false
-)
+	vim.g.neovide_refresh_rate = 60
+	vim.g.neovide_refresh_rate_idle = 5
+
+	vim.g.neovide_no_idle = false
+	vim.g.neovide_fullscreen = false
+
+	vim.g.neovide_cursor_animation_length = 0.1
+	vim.g.neovide_cursor_trail_size = 0.5
+
+	vim.g.neovide_cursor_vfx_mode = "ripple"
+
+	-- transparency
+	vim.opt.pumblend = 30
+	vim.opt.winblend = 30
+end

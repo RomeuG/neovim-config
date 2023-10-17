@@ -4,18 +4,18 @@ local NvimTree = require("nvim-tree")
 NvimTree.setup({
 	disable_netrw = true,
 	hijack_netrw = true,
-	open_on_setup = false,
 	open_on_tab = false,
 	hijack_cursor = true,
 	update_cwd = true,
-	ignore_ft_on_setup = {},
 	hijack_directories = {
 		enable = false,
 		auto_open = false,
 	},
+	renderer = {
+		root_folder_label = false,
+	},
 	view = {
 		side = "right",
-		hide_root_folder = true,
 	},
 	diagnostics = {
 		enable = false,

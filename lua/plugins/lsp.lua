@@ -48,7 +48,7 @@ local handlers = {
 	["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = border }),
 	-- ["textDocument/definition"] = require('fzf-lua').lsp_definitions,
 	["textDocument/definition"] = function()
-		require('fzf-lua').lsp_definitions()
+		require("fzf-lua").lsp_definitions()
 	end,
 	["textDocument/references"] = fzf_goto_references(),
 }
@@ -135,6 +135,11 @@ local on_attach = function(client, bufnr)
               hi! LspReferenceRead cterm=bold ctermbg=237 guibg=gray29
               hi! LspReferenceText cterm=bold ctermbg=237 guibg=gray29
               hi! LspReferenceWrite cterm=bold ctermbg=237 guibg=gray29
+
+			  hi DiagnosticUnderlineError cterm=underline gui=underline guisp=#840000
+			  hi DiagnosticUnderlineHint cterm=underline  gui=underline guisp=#07455b
+			  hi DiagnosticUnderlineWarn cterm=underline  gui=underline guisp=#2f2905
+			  hi DiagnosticUnderlineInfo cterm=underline  gui=underline guisp=#265478
         ]])
 
 		vim.api.nvim_create_augroup("lsp_document_highlight", { clear = true })
@@ -252,7 +257,7 @@ require("rust-tools").setup({
 					loadOutDirsFromCheck = true,
 				},
 				procMacro = {
-					enable = true,
+					enable = false,
 				},
 			},
 		},
@@ -264,6 +269,9 @@ LspConfig.zls.setup(config({
 	on_attach = on_attach,
 	handlers = handlers,
 	flags = { debounce_text_changes = 500 },
+	settings = {
+		enable_autofix = true,
+	},
 }))
 
 -- Kotlin

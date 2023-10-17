@@ -16,4 +16,3 @@ AutoPairs.setup({
 		highlight_grey = "Normal",
 	},
 })
-

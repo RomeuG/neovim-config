@@ -28,9 +28,9 @@ abclear
 "ia dd #[derive(Debug)]
 
 " mapping
-map <F5> :Cargo build<CR>
-map <F6> :Cargo run<CR>
-map <F7> :Cargo clean<CR>
+map <buffer> <F5> :Cargo build<CR>
+map <buffer> <F6> :Cargo run<CR>
+map <buffer> <F7> :Cargo clean<CR>
 
 " disable formatting
 " autocmd! FORMATTING

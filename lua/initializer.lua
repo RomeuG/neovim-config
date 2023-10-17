@@ -14,6 +14,8 @@ require("plugins.autopairs")
 require("plugins.highlightedyank")
 require("plugins.ultisnips")
 
+require("plugins.surround")
+
 require("plugins.gitsigns")
 require("plugins.octo")
 

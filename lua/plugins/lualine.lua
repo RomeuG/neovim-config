@@ -64,17 +64,5 @@ LuaLine.setup({
 		},
 		lualine_x = { "filetype" },
 	},
-	tabline = {
-		lualine_a = {
-			{
-				"buffers",
-				mode = 0,
-			},
-		},
-		lualine_b = {},
-		lualine_c = {},
-		lualine_x = {},
-		lualine_y = {},
-		lualine_z = {},
-	},
+	tabline = {},
 })
