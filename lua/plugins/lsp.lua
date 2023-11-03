@@ -119,6 +119,13 @@ local on_attach = function(client, bufnr)
 	-- line diagnostics
 	vim.api.nvim_set_keymap("n", "gd", "<cmd>lua Show_line_diagnostics()<CR>", opts)
 
+	local methods = vim.lsp.protocol.Methods
+	if client.supports_method(methods.textDocument_inlayHint) then
+		vim.keymap.set("n", "<F10>", function()
+			vim.lsp.inlay_hint(bufnr, nil)
+		end, { desc = "[t]oggle inlay [h]ints" })
+	end
+
 	-- formatting
 	-- if client.resolved_capabilities.document_formatting then
 	--     vim.api.nvim_set_keymap('n', '<leader>ff', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)

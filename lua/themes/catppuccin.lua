@@ -12,7 +12,7 @@ require("catppuccin").setup({
 	},
 	transparent_background = false,
 	show_end_of_buffer = false, -- show the '~' characters after the end of buffers
-	term_colors = false,
+	term_colors = true,
 	dim_inactive = {
 		enabled = false,
 		shade = "dark",

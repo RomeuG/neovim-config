@@ -57,7 +57,7 @@ vim.api.nvim_set_keymap("n", "<leader>d2", ":diffget BASE<CR>", {})
 vim.api.nvim_set_keymap("n", "<leader>d3", ":diffget REMOTE<CR>", {})
 
 -- inlay hints
-vim.api.nvim_set_keymap("n", "<F10>", ":lua vim.lsp.buf.inlay_hint(0)<CR>", {});
+-- vim.api.nvim_set_keymap("n", "<F10>", ":lua vim.lsp.buf.inlay_hint(0)<CR>", {});
 
 -- other useful stuff
 local opts = { noremap = true, silent = true }
