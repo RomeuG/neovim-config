@@ -5,6 +5,12 @@ require("functions")
 require("mappings")
 require("commands")
 
+-- local
+
+require('local.crypter')
+
+-- plugins
+
 require("plugins.general")
 
 require("plugins.treesitter")
