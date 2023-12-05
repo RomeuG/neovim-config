@@ -73,6 +73,7 @@ vim.opt.colorcolumn = "80"
 vim.opt.timeoutlen = 500
 
 vim.opt.termguicolors = true
+vim.opt.guicursor = ""
 
 -- no annoyances
 vim.opt.errorbells = false

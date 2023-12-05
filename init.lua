@@ -135,7 +135,7 @@ require("initializer")
 if vim.g.neovide then
 	vim.o.guifont = "Iosevka_NF_SemiBold:h8"
 	vim.o.linespace = 0
-	vim.g.neovide_scale_factor = 2.0
+	vim.g.neovide_scale_factor = 1.2
 
 	vim.g.neovide_padding_top = 2
 	vim.g.neovide_padding_bottom = 2

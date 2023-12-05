@@ -122,7 +122,8 @@ local on_attach = function(client, bufnr)
 	local methods = vim.lsp.protocol.Methods
 	if client.supports_method(methods.textDocument_inlayHint) then
 		vim.keymap.set("n", "<F10>", function()
-			vim.lsp.inlay_hint(bufnr, nil)
+			local is_enabled = vim.lsp.inlay_hint.is_enabled(bufnr)
+			vim.lsp.inlay_hint.enable(bufnr, not is_enabled)
 		end, { desc = "[t]oggle inlay [h]ints" })
 	end
 
@@ -248,28 +249,32 @@ LspConfig.tsserver.setup(config({
 }))
 
 -- Rust Tools
-require("rust-tools").setup({
-	server = config({
-		on_attach = on_attach,
-		handlers = handlers,
-		settings = {
-			["rust-analyzer"] = {
-				lens = { enable = true },
-				checkOnSave = { command = "clippy" },
-				assist = {
-					importGranularity = "module",
-					importPrefix = "self",
-				},
-				cargo = {
-					loadOutDirsFromCheck = true,
-				},
-				procMacro = {
-					enable = false,
-				},
-			},
-		},
-	}),
+LspConfig.rust_analyzer.setup({
+	on_attach = on_attach,
+	handlers = handlers,
 })
+-- require("rust-tools").setup({
+-- 	server = config({
+-- 		on_attach = on_attach,
+-- 		handlers = handlers,
+-- 		settings = {
+-- 			["rust-analyzer"] = {
+-- 				lens = { enable = true },
+-- 				checkOnSave = { command = "clippy" },
+-- 				assist = {
+-- 					importGranularity = "module",
+-- 					importPrefix = "self",
+-- 				},
+-- 				cargo = {
+-- 					loadOutDirsFromCheck = true,
+-- 				},
+-- 				procMacro = {
+-- 					enable = false,
+-- 				},
+-- 			},
+-- 		},
+-- 	}),
+-- })
 
 -- Zig
 LspConfig.zls.setup(config({
