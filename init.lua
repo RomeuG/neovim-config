@@ -121,6 +121,9 @@ Plug("folke/todo-comments.nvim")
 -- fold
 Plug("anuvyklack/pretty-fold.nvim")
 
+-- nvim lua dev
+Plug("rafcamlet/nvim-luapad")
+
 vim.call("plug#end")
 
 -- gotta go fast
