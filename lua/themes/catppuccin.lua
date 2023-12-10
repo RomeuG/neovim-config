@@ -62,6 +62,9 @@ vim.cmd.colorscheme("catppuccin")
 
 -- highlight matching parenthesis with a more visible color
 vim.cmd([[highlight MatchParen cterm=bold cterm=underline ctermfg=red guibg=blue guifg=limegreen]])
+
+vim.cmd([[highlight WinSeparator ctermbg=grey guibg=#11111b ctermfg=grey guifg=grey]]);
+
 -- vim.cmd([[hi Delimiter guifg=#ff0000]])
 -- highlight vimtex conceal with better colors
 -- vim.cmd([[highlight Conceal ctermfg=red guifg=red]])
