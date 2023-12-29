@@ -1,4 +1,16 @@
+-- Here are some configs where I took ideas from (or copy pasted from)
+-- thanks to `wincent`
+-- https://github.com/wincent/wincent/
+-- thanks to `RaafatTurki`
+-- https://github.com/RaafatTurki/venom/
+
+-- define config directory
+local home = vim.env.HOME
+local config = home .. "/.config/nvim"
+
+-- globals
 vim.g.mapleader = ","
+vim.g.maplocalleader = "\\"
 
 -- remove cmdline
 -- vim.opt.cmdheight = 0
@@ -7,20 +19,29 @@ vim.g.mapleader = ","
 vim.opt.mouse = "a"
 -- use system clipboard
 vim.opt.clipboard = "unnamedplus"
+
 -- tab
 vim.opt.tabstop = 4
--- vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
--- tab key actions
+vim.opt.shiftround = false
 vim.opt.expandtab = false
 vim.opt.smarttab = true
+
 -- highlight text during search druing search
 vim.opt.incsearch = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.hlsearch = true
--- TODO
-vim.opt.fillchars = "eob: "
+
+-- fillchars ?????????
+-- vim.opt.fillchars = "eob: "
+vim.opt.fillchars = {
+	diff = "∙", -- BULLET OPERATOR (U+2219, UTF-8: E2 88 99)
+	eob = " ", -- NO-BREAK SPACE (U+00A0, UTF-8: C2 A0) to suppress ~ at EndOfBuffer
+	fold = "·", -- MIDDLE DOT (U+00B7, UTF-8: C2 B7)
+	vert = "┃", -- BOX DRAWINGS HEAVY VERTICAL (U+2503, UTF-8: E2 94 83)
+}
+
 -- wrap long lines set by tw
 vim.opt.wrap = false
 vim.opt.breakindent = false
@@ -39,20 +60,24 @@ vim.opt.showcmd = false
 vim.opt.conceallevel = 2
 -- conceal cursor
 vim.opt.concealcursor = "nc"
--- split to the right
+
+-- split right and below
 vim.opt.splitright = true
--- split below
 vim.opt.splitbelow = true
+
 -- enable emojis
 vim.opt.emoji = true
 -- set history limit to 1000 line
 vim.opt.history = 1000
 -- mindful and sensible backspace
-vim.opt.backspace = [[indent,eol,start]]
+vim.opt.backspace = "indent,eol,start"
 -- persistent undo
 vim.opt.undofile = true
 -- undo temporary directory
 vim.opt.undodir = "/tmp"
+-- views
+vim.opt.viewdir = config .. "/view"
+vim.opt.viewoptions = "cursor,folds"
 -- visual feedback while substituting
 vim.opt.inccommand = "nosplit"
 -- always show tabline
@@ -76,6 +101,7 @@ vim.opt.termguicolors = true
 vim.opt.guicursor = ""
 
 -- no annoyances
+vim.opt.belloff = "all"
 vim.opt.errorbells = false
 vim.opt.visualbell = false
 
@@ -86,27 +112,75 @@ vim.opt.scrolljump = 5
 vim.opt.lazyredraw = true
 vim.opt.redrawtime = 10000
 vim.opt.synmaxcol = 180
+vim.opt.sidescroll = 0
+vim.opt.sidescrolloff = 3
+
 -- should be 2 for better performance
 vim.opt.re = 2
+
+-- show whitespace and other stuff
+vim.opt.list = true
+vim.opt.listchars = { tab = ">·", trail = "·", precedes = "←", extends = "→", eol = " ", nbsp = "␣" }
 
 -- read when file is changed from outside
 vim.opt.autoread = true
 
+-- allow <BS>/h/l/<Left>/<Right>/<Space>, ~ to cross line boundaries
+vim.opt.whichwrap = "b,h,l,s,<,>,[,],~"
+
 -- wildcards to ignore
-vim.opt.wildignore = vim.opt.wildignore + { "*/target/*", "*/tmp/*", "*.swp", "*.pyc", "__pycache__" }
+vim.opt.wildmenu = true -- show options as list when switching buffers etc
+vim.opt.wildmode = "longest:full,full" -- shell-like autocomplete to unambiguous portion
+vim.opt.wildignore = vim.opt.wildignore
+	+ {
+		"*/target/*",
+		"*/tmp/*",
+		"*.swp",
+		"*.pyc",
+		"__pycache__",
+		"*.o",
+		"*.rej",
+		"*.so",
+	}
+
+-- swap files
+vim.opt.directory = config .. "/nvim/swap//"
+vim.opt.directory = vim.opt.directory + "."
+
+-- backup stuff
+vim.opt.backup = false
+vim.opt.backupcopy = "yes"
+vim.opt.backupdir = config .. "/backup//"
+vim.opt.backupdir = vim.opt.backupdir + "."
+vim.opt.backupskip = vim.opt.backupskip + "*.re,*.rei"
+vim.opt.writebackup = false
 
 -- lsp related useful options
 vim.opt.hidden = true
-vim.opt.backup = false
-vim.opt.writebackup = false
 vim.opt.updatetime = 200
-vim.opt.shortmess = vim.opt.shortmess + { c = true }
 vim.opt.signcolumn = "yes"
 
-vim.opt.completeopt = "menuone"
+-- messages
+vim.opt.shortmess = vim.opt.shortmess + "A" -- ignore annoying swapfile messages
+vim.opt.shortmess = vim.opt.shortmess + "I" -- no splash screen
+vim.opt.shortmess = vim.opt.shortmess + "O" -- file-read message overwrites previous
+vim.opt.shortmess = vim.opt.shortmess + "T" -- truncate non-file messages in middle
+vim.opt.shortmess = vim.opt.shortmess + "W" -- don't echo "[w]"/"[written]" when writing
+vim.opt.shortmess = vim.opt.shortmess + "a" -- use abbreviations in messages eg. `[RO]` instead of `[readonly]`
+vim.opt.shortmess = vim.opt.shortmess + "c" -- completion messages
+vim.opt.shortmess = vim.opt.shortmess + "o" -- overwrite file-written messages
+vim.opt.shortmess = vim.opt.shortmess + "t" -- truncate file messages at start
+
+-- completeopt for nvim-cmp
+vim.opt.completeopt = "menu"
+vim.opt.completeopt = vim.opt.completeopt + "menuone"
+vim.opt.completeopt = vim.opt.completeopt + "noselect"
 
 -- edit 1 char after end of line
 vim.opt.virtualedit = "onemore"
+
+-- diff stuff
+vim.opt.diffopt = vim.opt.diffopt + "foldcolumn:0"
 
 -- fold settings - requires treesitter!
 vim.opt.foldmethod = "expr"
