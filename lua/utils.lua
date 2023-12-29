@@ -24,4 +24,16 @@ M.create_command = function(name, command)
   vim.api.nvim_create_user_command(name, command, {nargs = '*'})
 end
 
+-- taken from
+-- https://github.com/RaafatTurki/venom/blob/ba7158bb1fe69ff68a5ee6611b1c99eb15813164/lua/helpers/utils.lua
+function M.is_file_huge(file_path)
+  local huge_buffer_size = 1000000 -- 1MB
+  local ok, stats = pcall(vim.loop.fs_stat, file_path)
+  if ok and stats then return stats.size > huge_buffer_size end
+end
+
+function M.is_buf_huge(buf)
+  return M.is_file_huge(vim.api.nvim_buf_get_name(buf))
+end
+
 return M

@@ -2,6 +2,8 @@
 -- autocommands
 --
 
+local U = require("utils")
+
 -- Highlight on yank
 vim.api.nvim_create_augroup("YankHighlight", { clear = true })
 
@@ -61,6 +63,24 @@ vim.api.nvim_create_autocmd("BufEnter", {
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "qf",
 	command = "nnoremap <buffer> <CR> <CR>:cclose<CR>",
+})
+
+-- save folds
+vim.api.nvim_create_autocmd({ "BufWinLeave", "BufWritePost" }, {
+	callback = function(ev)
+		if not U.is_buf_huge(ev.buf) then
+			vim.cmd([[silent! mkview]])
+		end
+	end,
+})
+
+-- load folds
+vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
+	callback = function(ev)
+		if not U.is_buf_huge(ev.buf) then
+			vim.cmd([[silent! loadview]])
+		end
+	end,
 })
 
 --
