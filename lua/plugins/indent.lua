@@ -16,24 +16,24 @@ local exclude_ft = {
 	"Trouble",
 }
 
-require("ibl").setup({
-    -- show_current_context = true,
-    -- show_current_context_start = false,
-    -- show_end_of_line = false,
-	indent = {
-		-- -- U+2502 may also be a good choice, it will be on the middle of cursor.
-		-- -- U+250A is also a good choice
-		char = "▏",
-	},
-	exclude = {
-		filetypes = exclude_ft,
-		buftypes = { "terminal", "nofile", "telescope" },
-	},
-    scope = {
-        enabled = true,
-        show_start = false,
-    }
-})
+-- require("ibl").setup({
+-- 	-- show_current_context = true,
+-- 	-- show_current_context_start = false,
+-- 	-- show_end_of_line = false,
+-- 	indent = {
+-- 		-- -- U+2502 may also be a good choice, it will be on the middle of cursor.
+-- 		-- -- U+250A is also a good choice
+-- 		char = "▏",
+-- 	},
+-- 	exclude = {
+-- 		filetypes = exclude_ft,
+-- 		buftypes = { "terminal", "nofile", "telescope" },
+-- 	},
+-- 	scope = {
+-- 		enabled = false,
+-- 		show_start = false,
+-- 	},
+-- })
 
 -- vim.g.indentLine_enabled = 1
 -- vim.g.indent_blankline_enabled = true

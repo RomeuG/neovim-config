@@ -21,7 +21,8 @@ TreeSitter.setup({
 		"bash",
 		"query",
 		"smali",
-		"markdown"
+		"markdown",
+		"vimdoc"
 	},
 	autotag = {
 		enable = true,
