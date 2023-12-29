@@ -28,7 +28,7 @@ Plug("lewis6991/gitsigns.nvim")
 
 -- github support
 Plug("pwntester/octo.nvim")
-Plug("nvim-tree/nvim-web-devicons")
+-- Plug("nvim-tree/nvim-web-devicons")
 
 -- undo tree
 Plug("mbbill/undotree")
