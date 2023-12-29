@@ -41,6 +41,15 @@ vim.api.nvim_create_autocmd("BufReadPost", {
     ]],
 })
 
+-- resize splits if window got resized
+vim.api.nvim_create_autocmd({ "VimResized" }, {
+	callback = function()
+		local current_tab = vim.fn.tabpagenr()
+		vim.cmd("tabdo wincmd =")
+		vim.cmd("tabnext " .. current_tab)
+	end,
+})
+
 -- nasm
 vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
 	pattern = { "*.S", "*.s", "*.asm", "*.inc" },
