@@ -28,6 +28,9 @@ Plug("sindrets/diffview.nvim")
 
 -- git nice stuff
 Plug("lewis6991/gitsigns.nvim")
+Plug("rhysd/git-messenger.vim")
+Plug("FabijanZulj/blame.nvim")
+Plug("rhysd/committia.vim")
 
 -- github support
 Plug("pwntester/octo.nvim")
