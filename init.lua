@@ -23,12 +23,15 @@ Plug("terrortylor/nvim-comment")
 -- git support
 Plug("tpope/vim-fugitive")
 
+-- git diffview
+Plug("sindrets/diffview.nvim")
+
 -- git nice stuff
 Plug("lewis6991/gitsigns.nvim")
 
 -- github support
 Plug("pwntester/octo.nvim")
--- Plug("nvim-tree/nvim-web-devicons")
+Plug("nvim-tree/nvim-web-devicons")
 
 -- undo tree
 Plug("mbbill/undotree")
