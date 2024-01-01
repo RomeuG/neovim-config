@@ -7,20 +7,20 @@ vim.g.tex_flavor = "latex"
 -- vim.g.tex_conceal = "abdmg"
 vim.g.tex_conceal = ""
 vim.g.vimtex_syntax_conceal = {
-        accents = 0,
-        ligatures = 0,
-        cites = 0,
-        fancy = 0,
-        spacing = 0, -- default: 1
-        greek = 0,
-        math_bounds = 0,
-        math_delimiters = 0,
-        math_fracs = 0,
-        math_super_sub = 0,
-        math_symbols = 0,
-        sections = 0,
-        styles = 0,
-      }
+	accents = 0,
+	ligatures = 0,
+	cites = 0,
+	fancy = 0,
+	spacing = 0, -- default: 1
+	greek = 0,
+	math_bounds = 0,
+	math_delimiters = 0,
+	math_fracs = 0,
+	math_super_sub = 0,
+	math_symbols = 0,
+	sections = 0,
+	styles = 0,
+}
 
 vim.g.vimtex_view_method = "general"
 
@@ -35,7 +35,7 @@ vim.g.vimtex_compiler_engine = "luatex"
 vim.g.vimtex_compiler_latexmk = {
 	executable = "latexmk",
 	options = {
-        "-verbose",
+		"-verbose",
 		"-shell-escape",
 		"-file-line-error",
 		"-synctex=1",
@@ -94,4 +94,12 @@ vim.g.vimtex_fold_types = {
 			"paragraph",
 		},
 	},
+}
+
+-- ignore these logs
+vim.g.vimtex_log_ignore = {
+	"Underfull",
+	"Overfull",
+	"specifier changed to",
+	"Token not allowed in a PDF string",
 }

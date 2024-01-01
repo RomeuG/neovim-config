@@ -24,20 +24,6 @@ local kind_icons = {
 	Variable = " ",
 }
 
-local t = function(str)
-	return vim.api.nvim_replace_termcodes(str, true, true, true)
-end
-
-local check_back_space = function()
-	local col = vim.fn.col(".") - 1
-	return col == 0 or vim.fn.getline("."):sub(col, col):match("%s") ~= nil
-end
-
-local feedkey = function(key, mode)
-	mode = mode or "n"
-	vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
-end
-
 local has_words_before = function(char)
 	if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then
 		return false
@@ -144,7 +130,8 @@ Cmp.setup({
 		},
 	},
 	completion = {
-		keyword_length = 2,
+		completeopt = "menu,noselect",
+		keyword_length = 1,
 	},
 	window = {
 		documentation = {
@@ -164,5 +151,36 @@ Cmp.setup({
 		{ name = "nvim_lsp" },
 		{ name = "ultisnips" },
 		{ name = "path" },
+		{ name = "vimtex" },
+		{
+			name = "latex_symbols",
+			filetype = { "tex", "latex" },
+			option = { cache = true }, -- avoids reloading each time
+		},
 	}),
+	-- formatting = {
+	-- 	fields = { "kind", "abbr", "menu" },
+	-- 	format = function(entry, vim_item)
+	-- 		-- Kind icons
+	-- 		vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
+	-- 		-- vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
+	-- 		vim_item.menu = ({
+	-- 			-- omni = (vim.inspect(vim_item.menu):gsub('%"', "")),
+	-- 			vimtex = (vim_item.menu ~= nil and vim_item.menu or ""),
+	-- 			nvim_lsp = "[LSP]",
+	-- 			luasnip = "[Snippet]",
+	-- 			buffer = "[Buffer]",
+	-- 			spell = "[Spell]",
+	-- 			latex_symbols = "[Symbols]",
+	-- 			cmdline = "[CMD]",
+	-- 			path = "[Path]",
+	-- 		})[entry.source.name]
+	-- 		return vim_item
+	-- 	end,
+	-- },
+	performance = {
+		trigger_debounce_time = 500,
+		throttle = 550,
+		fetching_timeout = 80,
+	},
 })

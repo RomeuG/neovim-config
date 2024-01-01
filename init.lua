@@ -1,3 +1,12 @@
+-- Here are some configs where I took ideas from (or copy pasted from)
+-- thanks to `wincent`
+-- https://github.com/wincent/wincent/
+-- thanks to `RaafatTurki`
+-- https://github.com/RaafatTurki/venom/
+-- thanks to `benbrastmckie`
+-- https://github.com/benbrastmckie/.config
+
+
 -- Plugged object
 local Plug = vim.fn["plug#"]
 vim.call("plug#begin", "~/.config/nvim/plugged")
@@ -29,7 +38,6 @@ Plug("sindrets/diffview.nvim")
 -- git nice stuff
 Plug("lewis6991/gitsigns.nvim")
 Plug("rhysd/git-messenger.vim")
-Plug("FabijanZulj/blame.nvim")
 Plug("rhysd/committia.vim")
 
 -- github support
@@ -99,8 +107,8 @@ Plug("rmagatti/auto-session")
 -- choosewin
 Plug("t9md/vim-choosewin")
 
--- indent lines
-Plug("lukas-reineke/indent-blankline.nvim")
+-- show indentation
+Plug("echasnovski/mini.indentscope")
 
 -- distraction free editing
 Plug("junegunn/goyo.vim")
@@ -115,7 +123,6 @@ Plug("editorconfig/editorconfig-vim")
 Plug("nvim-orgmode/orgmode")
 
 -- vim surround
--- Plug("tpope/vim-surround")
 Plug("kylechui/nvim-surround")
 
 -- guess indentation
@@ -139,7 +146,7 @@ require("impatient").enable_profile()
 require("initializer")
 
 if vim.g.neovide then
-	vim.o.guifont = "Iosevka_NF_SemiBold:h8"
+	vim.o.guifont = "Iosevka_NFM_SemiBold:h8"
 	vim.o.linespace = 0
 	vim.g.neovide_scale_factor = 1.2
 

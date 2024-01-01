@@ -7,6 +7,7 @@ Gitsigns.setup({
 		delete = { hl = "GitSignsDelete", text = "_", numhl = "GitSignsDeleteNr", linehl = "GitSignsDeleteLn" },
 		topdelete = { hl = "GitSignsDelete", text = "‾", numhl = "GitSignsDeleteNr", linehl = "GitSignsDeleteLn" },
 		changedelete = { hl = "GitSignsChange", text = "~", numhl = "GitSignsChangeNr", linehl = "GitSignsChangeLn" },
+		untracked = { text = "┆" },
 	},
 	signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
 	numhl = false, -- Toggle with `:Gitsigns toggle_numhl`
@@ -23,6 +24,7 @@ Gitsigns.setup({
 		virt_text_pos = "eol", -- 'eol' | 'overlay' | 'right_align'
 		delay = 1000,
 		ignore_whitespace = false,
+		virt_text_priority = 100,
 	},
 	current_line_blame_formatter = "<author>, <author_time:%Y-%m-%d> - <summary>",
 	sign_priority = 6,

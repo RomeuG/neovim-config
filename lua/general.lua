@@ -1,9 +1,3 @@
--- Here are some configs where I took ideas from (or copy pasted from)
--- thanks to `wincent`
--- https://github.com/wincent/wincent/
--- thanks to `RaafatTurki`
--- https://github.com/RaafatTurki/venom/
-
 -- define config directory
 local home = vim.env.HOME
 local config = home .. "/.config/nvim"

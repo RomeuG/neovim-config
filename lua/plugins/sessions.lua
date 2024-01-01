@@ -1,18 +1,3 @@
--- local path = require("plenary.path")
-
--- require("session_manager").setup({
---     sessions_dir = path:new(vim.fn.stdpath("data"), "sessions"),
---     path_replacer = "__",
---     colon_replacer = "++",
---     autoload_mode = require("session_manager.config").AutoloadMode.Disabled,
---     autosave_last_session = false,
---     autosave_ignore_not_normal = true,
--- })
-
--- -- Mappings
--- vim.api.nvim_set_keymap("n", "<F11>", ":SessionManager save_current_session<CR>", { noremap = true })
--- vim.api.nvim_set_keymap("n", "<F12>", ":SessionManager load_session<CR>", { noremap = true })
-
 require("auto-session").setup({
 	log_level = "error",
 	auto_session_enabled = false,

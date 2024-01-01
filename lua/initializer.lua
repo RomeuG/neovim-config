@@ -22,6 +22,8 @@ require("plugins.ultisnips")
 
 require("plugins.surround")
 
+require("plugins.diffview")
+require("plugins.gitmessenger")
 require("plugins.gitsigns")
 require("plugins.octo")
 
