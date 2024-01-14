@@ -1,9 +1,6 @@
 -- background
 vim.opt.background = "dark"
 
--- theme enable
-vim.cmd.syntax = "on"
-
 require("catppuccin").setup({
 	flavour = "mocha", -- latte, frappe, macchiato, mocha
 	background = { -- :h background

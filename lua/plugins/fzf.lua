@@ -28,6 +28,7 @@ Fzf.setup({
 		"^resources/",
 		"^.github/",
 		"^build/",
+		"target"
 	},
 	files = {
 		prompt = "Files❯ ",

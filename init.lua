@@ -153,7 +153,7 @@ if vim.g.neovide then
 	vim.g.neovide_floating_blur_amount_y = 4.0
 
 	vim.g.neovide_transparency = 1.0
-	vim.g.neovide_scroll_animation_length = 0.2
+	vim.g.neovide_scroll_animation_length = 0.1
 
 	vim.g.neovide_hide_mouse_when_typing = true
 	vim.g.neovide_underline_automatic_scaling = false
