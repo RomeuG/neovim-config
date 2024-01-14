@@ -1,3 +1,9 @@
+-- spelling
+vim.opt_local.spell = true
+vim.opt_local.spelllang = "en_gb"
+-- spelling fix
+vim.api.nvim_buf_set_keymap(0, "i", "<C-l>", "<c-g>u<Esc>[s1z=`]a<c-g>u", { noremap = true, silent = false })
+
 -- textwidth should be zero
 vim.bo.textwidth = 0
 
