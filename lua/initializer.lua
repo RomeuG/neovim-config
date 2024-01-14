@@ -1,4 +1,6 @@
 require("general")
+require("general.setcellwidths")
+
 require("theme")
 
 require("functions")
@@ -7,14 +9,14 @@ require("commands")
 
 -- local
 
-require('local.crypter')
+require("local.crypter")
 
 -- plugins
 
 require("plugins.general")
 
 require("plugins.treesitter")
-require('plugins.autotag')
+require("plugins.autotag")
 require("plugins.lualine")
 require("plugins.autopairs")
 require("plugins.highlightedyank")
@@ -25,7 +27,6 @@ require("plugins.surround")
 require("plugins.diffview")
 require("plugins.gitmessenger")
 require("plugins.gitsigns")
-require("plugins.octo")
 
 require("plugins.cmp")
 require("plugins.lsp")
@@ -46,4 +47,3 @@ require("plugins.orgmode")
 require("plugins.guessindent")
 require("plugins.todocomments")
 require("plugins.fold")
-
