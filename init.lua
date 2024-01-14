@@ -11,11 +11,7 @@
 local Plug = vim.fn["plug#"]
 vim.call("plug#begin", "~/.config/nvim/plugged")
 
--- Speedup nvim
-Plug("lewis6991/impatient.nvim")
-
 -- theme
--- Plug("rktjmp/lush.nvim")
 Plug("sainnhe/gruvbox-material")
 Plug("catppuccin/nvim")
 
@@ -39,10 +35,6 @@ Plug("sindrets/diffview.nvim")
 Plug("lewis6991/gitsigns.nvim")
 Plug("rhysd/git-messenger.vim")
 Plug("rhysd/committia.vim")
-
--- github support
-Plug("pwntester/octo.nvim")
-Plug("nvim-tree/nvim-web-devicons")
 
 -- undo tree
 Plug("mbbill/undotree")
@@ -117,7 +109,7 @@ Plug("junegunn/goyo.vim")
 Plug("rust-lang/rust.vim")
 
 -- EditorConfig
-Plug("editorconfig/editorconfig-vim")
+Plug("gpanders/editorconfig.nvim")
 
 -- orgmode
 Plug("nvim-orgmode/orgmode")
@@ -140,7 +132,7 @@ Plug("rafcamlet/nvim-luapad")
 vim.call("plug#end")
 
 -- gotta go fast
-require("impatient").enable_profile()
+vim.loader.enable()
 
 -- initialize rest
 require("initializer")
