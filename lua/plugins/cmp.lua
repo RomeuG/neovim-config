@@ -178,9 +178,9 @@ Cmp.setup({
 	-- 		return vim_item
 	-- 	end,
 	-- },
-	performance = {
-		trigger_debounce_time = 500,
-		throttle = 550,
-		fetching_timeout = 80,
-	},
+	-- performance = {
+	-- 	trigger_debounce_time = 500,
+	-- 	throttle = 550,
+	-- 	fetching_timeout = 80,
+	-- },
 })

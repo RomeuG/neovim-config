@@ -201,6 +201,7 @@ LspConfig.clangd.setup(config({
 	on_attach = on_attach,
 	handlers = handlers,
 	flags = { debounce_text_changes = 500 },
+	-- root_dir = LspConfig.util.root_pattern("compile_commands.json", ".git"),
 	cmd = {
 		-- see clangd --help-hidden
 		"clangd",
@@ -212,6 +213,7 @@ LspConfig.clangd.setup(config({
 		"--completion-style=bundled",
 		"--cross-file-rename",
 		"--header-insertion=never",
+		-- "--compile-commands-dir=/run/media/romeu/STORAGE3/Projects-Work/connectedhomeip/out/host",
 	},
 }))
 
